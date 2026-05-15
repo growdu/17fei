@@ -1,0 +1,46 @@
+/* 简约现代主题 - 17fei.fun */
+:root {
+  /* 主色调 - 柔和蓝灰 */
+  --theme-primary: #5c7cfa;
+  --theme-secondary: #4c6ef5;
+  --theme-accent: #748ffc;
+
+  /* 背景色 */
+  --theme-background: #f8f9fa;
+  --theme-background-secondary: #e9ecef;
+
+  /* 文字色 */
+  --theme-text: #343a40;
+  --theme-text-light: #868e96;
+
+  /* 卡片 */
+  --theme-card-bg: #ffffff;
+  --theme-card-border: rgba(0,0,0,0.08);
+
+  /* 渐变 */
+  --theme-gradient-start: #5c7cfa;
+  --theme-gradient-end: #4c6ef5;
+  --theme-gradient: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+
+  /* 圆角 */
+  --theme-border-radius: 8px;
+  --theme-border-radius-sm: 4px;
+
+  /* 阴影 */
+  --theme-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --theme-shadow-hover: 0 4px 16px rgba(0,0,0,0.12);
+
+  /* 动画 */
+  --theme-transition: 0.2s ease;
+  --theme-animation: none;
+
+  /* 按钮 */
+  --theme-btn-bg: linear-gradient(135deg, #5c7cfa, #4c6ef5);
+  --theme-btn-hover-bg: linear-gradient(135deg, #748ffc, #5c7cfa);
+
+  /* 粒子效果 */
+  --theme-particle-enabled: false;
+
+  /* 图标风格 */
+  --theme-icon-border-radius: 4px;
+}

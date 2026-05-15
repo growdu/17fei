@@ -1,0 +1,47 @@
+/* 高端私密主题 - 17fei.fun */
+:root {
+  /* 主色调 - 深紫黑金 */
+  --theme-primary: #9775fa;
+  --theme-secondary: #845ef7;
+  --theme-accent: #b197fc;
+
+  /* 背景色 */
+  --theme-background: #1a1a2e;
+  --theme-background-secondary: #16213e;
+
+  /* 文字色 */
+  --theme-text: #e9ecef;
+  --theme-text-light: #adb5bd;
+
+  /* 卡片 */
+  --theme-card-bg: rgba(255,255,255,0.05);
+  --theme-card-border: rgba(151,117,250,0.3);
+
+  /* 渐变 */
+  --theme-gradient-start: #9775fa;
+  --theme-gradient-end: #845ef7;
+  --theme-gradient: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+
+  /* 圆角 */
+  --theme-border-radius: 12px;
+  --theme-border-radius-sm: 6px;
+
+  /* 阴影 */
+  --theme-shadow: 0 4px 20px rgba(151,117,250,0.2);
+  --theme-shadow-hover: 0 8px 30px rgba(151,117,250,0.3);
+
+  /* 动画 */
+  --theme-transition: 0.3s ease;
+  --theme-animation: glow 2s ease-in-out infinite;
+
+  /* 按钮 */
+  --theme-btn-bg: linear-gradient(135deg, #9775fa, #845ef7);
+  --theme-btn-hover-bg: linear-gradient(135deg, #b197fc, #9775fa);
+
+  /* 粒子效果 */
+  --theme-particle-enabled: true;
+  --theme-particle-color: #9775fa;
+
+  /* 图标风格 */
+  --theme-icon-border-radius: 8px;
+}

@@ -1,0 +1,46 @@
+/* 浪漫梦幻主题 - 17fei.fun 默认主题 */
+:root {
+  /* 主色调 - 粉色系 */
+  --theme-primary: #ff6b9d;
+  --theme-secondary: #c44569;
+  --theme-accent: #ff8fab;
+
+  /* 背景色 */
+  --theme-background: #fff0f5;
+  --theme-background-secondary: #ffe4ec;
+
+  /* 文字色 */
+  --theme-text: #4a4a4a;
+  --theme-text-light: #8a6c6c;
+
+  /* 卡片 */
+  --theme-card-bg: #ffffff;
+  --theme-card-border: rgba(255,107,157,0.2);
+
+  /* 渐变 */
+  --theme-gradient-start: #ff6b9d;
+  --theme-gradient-end: #c44569;
+  --theme-gradient: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+
+  /* 圆角 */
+  --theme-border-radius: 16px;
+  --theme-border-radius-sm: 8px;
+
+  /* 阴影 */
+  --theme-shadow: 0 4px 20px rgba(255,107,157,0.3);
+  --theme-shadow-hover: 0 8px 30px rgba(255,107,157,0.4);
+
+  /* 动画 */
+  --theme-transition: 0.3s ease;
+  --theme-animation: pulse 2s ease-in-out infinite;
+
+  /* 按钮 */
+  --theme-btn-bg: linear-gradient(135deg, #ff6b9d, #c44569);
+  --theme-btn-hover-bg: linear-gradient(135deg, #ff8fab, #d65a7d);
+
+  /* 粒子效果 */
+  --theme-particle-enabled: true;
+
+  /* 图标风格 */
+  --theme-icon-border-radius: 50%;
+}
