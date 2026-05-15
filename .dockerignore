@@ -1,0 +1,8 @@
+**/_fresh
+**/node_modules
+**/.git
+**/.cache
+.gitignore
+.dockerignore
+Dockerfile
+*.md
