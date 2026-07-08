@@ -1,5 +1,6 @@
 import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
+import SeoHead from "../components/SeoHead.tsx";
 
 interface Plan {
   name: string;
@@ -20,7 +21,7 @@ const PLANS: Plan[] = [
     name: "终身会员",
     price: "49",
     original: "99",
-    desc: "一次开通，永久使用",
+    desc: "一次开通,永久使用",
     badge: "限时",
     recommended: true,
   },
@@ -29,6 +30,12 @@ const PLANS: Plan[] = [
 export default function About() {
   return (
     <>
+      <SeoHead
+        title="关于 17fei.fun - 会员开通 / 联系站长"
+        description="单月 10 元,终身 49 元。微信 wbot10 联系开通。1~12 小时内人工响应。"
+        url="/about"
+        keywords="17fei 会员, 开通 VIP, 激活码"
+      />
       <Container narrow>
         <header class="hero">
           <img src="/logo.png" alt="logo" class="hero-logo" />
@@ -116,7 +123,7 @@ export default function About() {
             >
               wbot10
             </code>{" "}
-            ，1~12 小时内响应。
+           ,1~12 小时内响应。
           </p>
         </section>
 
@@ -128,7 +135,7 @@ export default function About() {
           </h2>
           <img
             src="/qrcode.JPG"
-            alt="微信"
+            alt="微信 wbot10 二维码"
             style={{
               maxWidth: "240px",
               borderRadius: "var(--theme-border-radius-lg)",

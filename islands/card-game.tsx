@@ -6,6 +6,13 @@ interface Props {
   versions: [string, string[]][];
 }
 
+const showToast = (msg: string) => {
+  if (typeof window !== "undefined") {
+    const w = window as unknown as { showToast?: (m: string) => void };
+    w.showToast?.(msg);
+  }
+};
+
 const VERSION_TITLES: Record<string, string> = {
   lover0: "恋爱版",
   lover1: "热恋版",
@@ -70,6 +77,9 @@ export default function CardGame({ versions }: Props) {
       setTotal(next);
       localStorage.setItem(STORAGE_COUNTER, String(next));
       setFlipping(false);
+      if (next === 1 || next % 10 === 0) {
+        showToast(next === 1 ? "🎉 开始第一张" : `已经抽了 ${next} 张`);
+      }
     }, 250);
   };
 

@@ -1,6 +1,6 @@
-import { Head } from "$fresh/runtime.ts";
 import { Handlers } from "$fresh/server.ts";
 
+// 老 /card_version 路由已经合并到 /card 的下拉选择, 永久重定向
 export const handler: Handlers = {
   GET() {
     return new Response(null, {
@@ -9,11 +9,3 @@ export const handler: Handlers = {
     });
   },
 };
-
-export default function CardVersionLegacy() {
-  return (
-    <Head>
-      <title>任务卡牌 · 17fei</title>
-    </Head>
-  );
-}

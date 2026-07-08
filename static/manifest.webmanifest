@@ -1,0 +1,61 @@
+{
+  "name": "17fei.fun - 情侣情趣飞行棋",
+  "short_name": "17fei",
+  "description": "情侣专属私密游乐场 - 飞行棋 · 任务卡牌 · 姿势图鉴 · AI 伴侣",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff0f6",
+  "theme_color": "#ff4d8d",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["entertainment", "lifestyle"],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "任务卡牌",
+      "url": "/card",
+      "description": "翻牌抽取情侣任务"
+    },
+    {
+      "name": "姿势卡牌",
+      "url": "/position",
+      "description": "随机姿势 + 收藏"
+    },
+    {
+      "name": "姿势大全",
+      "url": "/positions",
+      "description": "全部姿势 + 搜索 + 收藏"
+    },
+    {
+      "name": "飞行棋",
+      "url": "/fxq/index.html",
+      "description": "经典双人对战"
+    },
+    {
+      "name": "AI 伴侣",
+      "url": "/ai",
+      "description": "排队订阅中"
+    }
+  ],
+  "prefer_related_applications": false
+}

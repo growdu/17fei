@@ -22,8 +22,8 @@ import * as $unopen from "./routes/unopen.tsx";
 import * as $card_game from "./islands/card-game.tsx";
 import * as $position_card from "./islands/position-card.tsx";
 import * as $position_list from "./islands/position-list.tsx";
+import * as $pwa_install from "./islands/pwa-install.tsx";
 import * as $theme_switcher from "./islands/theme-switcher.tsx";
-import * as $toast from "./islands/toast.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -42,6 +42,7 @@ const manifest = {
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
     "./routes/member.tsx": $member,
+    "./routes/offline.tsx": $offline,
     "./routes/position.tsx": $position,
     "./routes/positions.tsx": $positions,
     "./routes/unopen.tsx": $unopen,
@@ -50,8 +51,8 @@ const manifest = {
     "./islands/card-game.tsx": $card_game,
     "./islands/position-card.tsx": $position_card,
     "./islands/position-list.tsx": $position_list,
+    "./islands/pwa-install.tsx": $pwa_install,
     "./islands/theme-switcher.tsx": $theme_switcher,
-    "./islands/toast.tsx": $toast,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

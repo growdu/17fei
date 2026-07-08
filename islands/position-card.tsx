@@ -6,6 +6,13 @@ interface Props {
   freeCount: number;
 }
 
+const showToast = (msg: string) => {
+  if (typeof window !== "undefined") {
+    const w = window as unknown as { showToast?: (m: string) => void };
+    w.showToast?.(msg);
+  }
+};
+
 const STORAGE_VIP = "vip";
 const STORAGE_TOTAL = "position_drawn_total";
 const STORAGE_FAVS = "position_favs";
@@ -48,19 +55,30 @@ export default function PositionCard({ positions, freeCount }: Props) {
       localStorage.setItem(STORAGE_TOTAL, String(n));
       setShowFront(false);
       setFlipping(false);
+      if (n === 1 || n % 10 === 0) {
+        showToast(n === 1 ? "🎲 第一抽" : `已经抽 ${n} 次了`);
+      }
     }, 300);
   };
 
   const toggleFav = () => {
     if (!src) return;
     let nextFavs: string[];
+    let added: boolean;
     if (favs.includes(src)) {
       nextFavs = favs.filter((f) => f !== src);
+      added = false;
     } else {
       nextFavs = [...favs, src];
+      added = true;
     }
     setFavs(nextFavs);
     localStorage.setItem(STORAGE_FAVS, JSON.stringify(nextFavs));
+    if (added) {
+      showToast("⭐ 已收藏");
+    } else {
+      showToast("💔 已取消收藏");
+    }
   };
 
   const reset = () => {

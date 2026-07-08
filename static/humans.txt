@@ -1,0 +1,11 @@
+/* TEAM */
+Author: 17fei
+Site: https://17fei.fun
+Twitter: @17fei
+Contact: wechat wbot10
+
+/* SITE */
+Last update: 2026/07/08
+Standards: HTML5, CSS3, ES2022
+Components: Fresh, Preact, Deno, Deno KV
+Software: Deno Deploy, GitHub

@@ -2,6 +2,7 @@ import { useSignal } from "@preact/signals";
 
 import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
+import SeoHead from "../components/SeoHead.tsx";
 
 interface Game {
   emoji: string;
@@ -66,6 +67,12 @@ const GAMES: Game[] = [
 export default function Home() {
   return (
     <>
+      <SeoHead
+        title="情侣情趣飞行棋 - 任务卡牌 + 姿势图鉴 + AI 伴侣"
+        description="免费的情侣情趣小游戏站:飞行棋、9 版本任务卡牌、100+ 姿势图鉴、即将上线的 AI 伴侣。5 套主题皮肤,1 个激活码开放全部功能。"
+        url="/"
+        keywords="情侣游戏, 情趣游戏, 飞行棋, 任务卡牌, 姿势图鉴, AI 伴侣, 17fei"
+      />
       <Container>
         <header class="hero">
           <img src="/logo.png" alt="logo" class="hero-logo" />

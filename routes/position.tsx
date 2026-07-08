@@ -1,15 +1,18 @@
-import { Head } from "$fresh/runtime.ts";
 import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
+import SeoHead from "../components/SeoHead.tsx";
 import PositionCard from "../islands/position-card.tsx";
 import { POSITION_KEYS, FREE_POSITION_COUNT } from "../lib/positions.ts";
 
 export default function PositionPage() {
   return (
     <>
-      <Head>
-        <title>姿势卡牌 · 17fei</title>
-      </Head>
+      <SeoHead
+        title="姿势卡牌 - 3D 翻牌随机姿势"
+        description="100+ 姿势随机抽取,3D 翻牌动效,支持收藏喜欢的姿势,免费抽 10 个,VIP 解锁全部"
+        url="/position"
+        keywords="姿势, 抽卡, 情趣姿势, 情侣姿势"
+      />
       <Container>
         <header class="hero">
           <div style={{ fontSize: "72px", marginBottom: "16px" }}>💃</div>

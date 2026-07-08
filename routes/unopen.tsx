@@ -1,9 +1,11 @@
 import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
+import SeoHead from "../components/SeoHead.tsx";
 
 export default function Unopen() {
   return (
     <>
+      <SeoHead title="维护中" url="/unopen" noindex />
       <Container narrow>
         <header class="hero">
           <div style={{ fontSize: "72px", marginBottom: "16px" }}>🔧</div>
@@ -44,7 +46,7 @@ export default function Unopen() {
             fontSize: "13px",
           }}
         >
-          关注小红书，获取最新发布动态 →
+          关注小红书,获取最新发布动态 →
           <a
             href="https://www.xiaohongshu.com/user/profile/64e8ce860000000001013f7a"
             target="_blank"

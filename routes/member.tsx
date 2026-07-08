@@ -1,17 +1,23 @@
 import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
+import SeoHead from "../components/SeoHead.tsx";
 
 export default function Member() {
   return (
     <>
+      <SeoHead
+        title="会员空间 - VIP 专享"
+        description="VIP 专享空间 - 解锁全部主题、姿势图鉴、私密内容"
+        url="/member"
+      />
       <Container narrow>
         <header class="hero">
           <span class="hero-badge">会员专享</span>
           <h1 class="hero-title">会员空间</h1>
           <p class="hero-subtitle">
-            提供大家好玩分享空间，共同成长，
+            提供大家好玩分享空间,共同成长,
             <br />
-            不露脸不露点，不低俗不越界
+            不露脸不露点,不低俗不越界
           </p>
         </header>
 
@@ -21,7 +27,7 @@ export default function Member() {
             功能搭建中
           </h2>
           <p class="section-text">
-            我们正在筹备会员分享板与高质量姿势图鉴，
+            我们正在筹备会员分享板与高质量姿势图鉴,
             <br />
             完成后将在第一时间通知。
           </p>
@@ -33,11 +39,8 @@ export default function Member() {
               borderRadius: "var(--theme-border-radius)",
             }}
           >
-            <p
-              class="section-text"
-              style={{ margin: 0, fontSize: "13px" }}
-            >
-              💬 有任何建议或想法，欢迎加微信{" "}
+            <p class="section-text" style={{ margin: 0, fontSize: "13px" }}>
+              💬 有任何建议或想法,欢迎加微信{" "}
               <code
                 style={{
                   padding: "2px 8px",

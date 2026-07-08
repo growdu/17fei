@@ -1,6 +1,6 @@
-import { Head } from "$fresh/runtime.ts";
 import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
+import SeoHead from "../components/SeoHead.tsx";
 
 export const handler = {
   async GET(req, ctx) {
@@ -32,9 +32,11 @@ export const handler = {
 export default function AI() {
     return (
         <>
-            <Head>
-                <title>AI 伴侣 · 17fei</title>
-            </Head>
+            <SeoHead
+                title="AI 伴侣 - 懂你、可撩、定制的虚拟陪伴"
+                description="即将上线。留下邮箱 + 期望性别,上线第一时间通知你。"
+                url="/ai"
+            />
             <Container narrow>
                 <header class="hero">
                     <div style={{ fontSize: "72px", marginBottom: "16px" }}>🤖</div>
@@ -48,7 +50,7 @@ export default function AI() {
                 <section class="form-card">
                     <h2 class="section-heading">抢先试用</h2>
                     <p class="section-text" style={{ marginTop: "12px" }}>
-                        留下邮箱 + 期望的性别，我们将在 AI 伴侣上线后第一时间通知你。
+                        留下邮箱 + 期望的性别,我们将在 AI 伴侣上线后第一时间通知你。
                     </p>
                     <form method="POST" style={{ marginTop: "24px" }} novalidate>
                         <div class="field">
@@ -126,17 +128,17 @@ export default function AI() {
                         <div class="game-card">
                             <span class="game-card-emoji">💬</span>
                             <h3 class="game-card-title">日常聊天</h3>
-                            <p class="game-card-desc">陪伴你聊天解闷，永远不会不耐烦</p>
+                            <p class="game-card-desc">陪伴你聊天解闷,永远不会不耐烦</p>
                         </div>
                         <div class="game-card">
                             <span class="game-card-emoji">🎭</span>
                             <h3 class="game-card-title">角色扮演</h3>
-                            <p class="game-card-desc">多场景剧本，沉浸式互动体验</p>
+                            <p class="game-card-desc">多场景剧本,沉浸式互动体验</p>
                         </div>
                         <div class="game-card">
                             <span class="game-card-emoji">💡</span>
                             <h3 class="game-card-title">个性化</h3>
-                            <p class="game-card-desc">记忆偏好，越来越懂你</p>
+                            <p class="game-card-desc">记忆偏好,越来越懂你</p>
                         </div>
                     </div>
                 </section>
