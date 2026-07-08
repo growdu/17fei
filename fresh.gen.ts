@@ -19,6 +19,7 @@ import * as $member from "./routes/member.tsx";
 import * as $position from "./routes/position.tsx";
 import * as $positions from "./routes/positions.tsx";
 import * as $unopen from "./routes/unopen.tsx";
+import * as $animated_counter from "./islands/animated-counter.tsx";
 import * as $card_game from "./islands/card-game.tsx";
 import * as $position_card from "./islands/position-card.tsx";
 import * as $position_list from "./islands/position-list.tsx";
@@ -48,6 +49,7 @@ const manifest = {
     "./routes/unopen.tsx": $unopen,
   },
   islands: {
+    "./islands/animated-counter.tsx": $animated_counter,
     "./islands/card-game.tsx": $card_game,
     "./islands/position-card.tsx": $position_card,
     "./islands/position-list.tsx": $position_list,

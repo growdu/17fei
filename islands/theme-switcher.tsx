@@ -8,9 +8,10 @@ interface ThemeInfo {
   preview: string;
   gradient: string;
   description: string;
+  isDark?: boolean;
 }
 
-const THEMES: ThemeInfo[] = [
+const LIGHT_THEMES: ThemeInfo[] = [
   {
     id: "romantic",
     name: "浪漫梦幻",
@@ -32,30 +33,46 @@ const THEMES: ThemeInfo[] = [
     gradient: "linear-gradient(135deg, #ff922b 0%, #f76707 100%)",
     description: "橙黄 · 弹性 · 圆润",
   },
+];
+
+const DARK_THEMES: ThemeInfo[] = [
   {
     id: "premium",
     name: "高端私密",
     preview: "linear-gradient(135deg, #b197fc 0%, #845ef7 100%)",
     gradient: "linear-gradient(135deg, #b197fc 0%, #845ef7 100%)",
     description: "深紫 · 玻璃 · 高质感",
+    isDark: true,
+  },
+  {
+    id: "darkrose",
+    name: "暗夜玫瑰",
+    preview: "linear-gradient(135deg, #ff6b9d 0%, #cc3370 100%)",
+    gradient: "linear-gradient(135deg, #ff6b9d 0%, #cc3370 100%)",
+    description: "暗底玫红 · 玻璃磨砂",
+    isDark: true,
   },
 ];
 
+const ALL_THEMES = [...LIGHT_THEMES, ...DARK_THEMES];
+
 const MAX_TRIAL_PER_DAY = 3;
+
 const STORAGE_VIP = "vip_status";
 const STORAGE_THEME = "current_theme";
+const STORAGE_MODE = "theme_mode"; // "manual" | "auto"
 const VIP_TOGGLE_KEY = "vip_toggle_enabled";
 
 const DAY_KEY = (d: string) => `theme_trial_${d}`;
+const getToday = () => new Date().toISOString().split("T")[0];
 
 interface TrialInfo {
   date: string;
   count: number;
 }
 
-const getToday = () => new Date().toISOString().split("T")[0];
-
 const getTrial = (): TrialInfo | null => {
+  if (typeof localStorage === "undefined") return null;
   const data = localStorage.getItem(DAY_KEY(getToday()));
   if (!data) return null;
   try {
@@ -67,14 +84,40 @@ const getTrial = (): TrialInfo | null => {
 };
 
 const setTrial = (count: number) => {
+  if (typeof localStorage === "undefined") return;
   localStorage.setItem(
     DAY_KEY(getToday()),
     JSON.stringify({ date: getToday(), count }),
   );
 };
 
+const systemPrefersDark = (): boolean => {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+};
+
+const pickAuto = (): string =>
+  systemPrefersDark() ? "darkrose" : "romantic";
+
+const loadThemeCss = (themeId: string) => {
+  if (typeof document === "undefined") return;
+  const old = document.getElementById("theme-css");
+  old?.remove();
+  const link = document.createElement("link");
+  link.id = "theme-css";
+  link.rel = "stylesheet";
+  link.href = `/themes/${themeId}.css`;
+  document.head.appendChild(link);
+  document.documentElement.setAttribute("data-theme", themeId);
+  document.documentElement.setAttribute(
+    "data-theme-mode",
+    systemPrefersDark() ? "dark" : "light",
+  );
+};
+
 export default function ThemeSwitcher() {
   const currentTheme = useSignal<string>("romantic");
+  const isAuto = useSignal<boolean>(true);
   const isVip = useSignal<boolean>(false);
   const trialCount = useSignal<number>(MAX_TRIAL_PER_DAY);
   const isPanelOpen = useSignal<boolean>(false);
@@ -84,36 +127,59 @@ export default function ThemeSwitcher() {
   const activationError = useSignal<string>("");
   const activationOk = useSignal<boolean>(false);
 
+  // 初始化 + 监听系统暗色变化
   useEffect(() => {
     if (!IS_BROWSER) return;
 
-    const vip = localStorage.getItem(STORAGE_VIP) === "true";
-    isVip.value = vip;
+    isVip.value = localStorage.getItem(STORAGE_VIP) === "true";
 
-    const saved = localStorage.getItem(STORAGE_THEME);
-    currentTheme.value = saved || "romantic";
-    if (saved && saved !== "romantic") {
-      loadThemeCss(saved);
-    }
+    const mode = localStorage.getItem(STORAGE_MODE);
+    const explicitAuto = mode === null; // 默认 auto
+    isAuto.value = explicitAuto || mode === "auto";
+
+    const applyByMode = () => {
+      if (isAuto.value) {
+        const picked = pickAuto();
+        currentTheme.value = picked;
+        loadThemeCss(picked);
+      } else {
+        const saved = localStorage.getItem(STORAGE_THEME) || "romantic";
+        currentTheme.value = saved;
+        if (saved !== "romantic") loadThemeCss(saved);
+      }
+    };
+    applyByMode();
 
     const trial = getTrial();
     trialCount.value = trial
       ? Math.max(0, MAX_TRIAL_PER_DAY - trial.count)
       : MAX_TRIAL_PER_DAY;
+
+    const mql = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => {
+      if (isAuto.value) applyByMode();
+    };
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
   }, []);
 
-  const loadThemeCss = (themeId: string) => {
-    const old = document.getElementById("theme-css");
-    old?.remove();
-    const link = document.createElement("link");
-    link.id = "theme-css";
-    link.rel = "stylesheet";
-    link.href = `/themes/${themeId}.css`;
-    document.head.appendChild(link);
+  const setMode = (mode: "auto" | "manual") => {
+    isAuto.value = mode === "auto";
+    localStorage.setItem(STORAGE_MODE, mode);
+    if (mode === "auto") {
+      const picked = pickAuto();
+      currentTheme.value = picked;
+      loadThemeCss(picked);
+    }
   };
 
   const switchTheme = (themeId: string) => {
     if (themeId === currentTheme.value) return;
+    if (isAuto.value) {
+      // 用户主动切换 → 退出 AUTO
+      setMode("manual");
+      isAuto.value = false;
+    }
     if (isVip.value) {
       applyTheme(themeId);
       return;
@@ -173,7 +239,6 @@ export default function ThemeSwitcher() {
   };
 
   const celebrate = () => {
-    // 简单五彩纸屑
     if (typeof document === "undefined") return;
     const colors = [
       "var(--theme-primary)",
@@ -200,6 +265,77 @@ export default function ThemeSwitcher() {
   const resetTrial = () => {
     setTrial(0);
     trialCount.value = MAX_TRIAL_PER_DAY;
+  };
+
+  const renderTheme = (t: ThemeInfo) => {
+    const active = currentTheme.value === t.id && !isAuto.value;
+    return (
+      <button
+        key={t.id}
+        onClick={() => switchTheme(t.id)}
+        style={{
+          padding: "10px",
+          border: active
+            ? "2px solid var(--theme-primary)"
+            : "1px solid var(--theme-card-border)",
+          borderRadius: "var(--theme-border-radius)",
+          background: "var(--theme-surface)",
+          cursor: "pointer",
+          textAlign: "left",
+          transition: "all 0.2s var(--theme-ease-out)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            height: "40px",
+            borderRadius: "var(--theme-border-radius-sm)",
+            background: t.gradient,
+            marginBottom: "6px",
+            boxShadow: active ? "var(--theme-shadow-glow)" : "none",
+          }}
+        />
+        <div
+          style={{
+            fontWeight: 700,
+            fontSize: "12px",
+            color: "var(--theme-text)",
+          }}
+        >
+          {t.name}
+        </div>
+        <div
+          style={{
+            fontSize: "10px",
+            color: "var(--theme-text-light)",
+            marginTop: "2px",
+          }}
+        >
+          {t.description}
+        </div>
+        {active && (
+          <span
+            style={{
+              position: "absolute",
+              top: "6px",
+              right: "6px",
+              background: "var(--theme-gradient)",
+              color: "#fff",
+              width: "18px",
+              height: "18px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "10px",
+            }}
+          >
+            ✓
+          </span>
+        )}
+      </button>
+    );
   };
 
   return (
@@ -229,7 +365,7 @@ export default function ThemeSwitcher() {
         onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
         onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
       >
-        <span style={{ fontSize: "22px", color: "white" }}>🎨</span>
+        <span style={{ fontSize: "22px", color: "white" }}>{isAuto.value ? "✨" : "🎨"}</span>
       </button>
 
       {isPanelOpen.value && (
@@ -241,12 +377,14 @@ export default function ThemeSwitcher() {
             right: "20px",
             width: "320px",
             maxWidth: "calc(100vw - 40px)",
+            maxHeight: "calc(100vh - 100px)",
+            overflowY: "auto",
             background: "var(--theme-surface-elevated)",
             backdropFilter: "blur(20px) saturate(180%)",
             WebkitBackdropFilter: "blur(20px) saturate(180%)",
             borderRadius: "var(--theme-border-radius-lg)",
             boxShadow: "var(--theme-shadow-lg)",
-            padding: "24px",
+            padding: "20px",
             zIndex: 1000,
             border: "1px solid var(--theme-card-border)",
             animation: "fade-up 0.25s var(--theme-ease-out)",
@@ -257,110 +395,148 @@ export default function ThemeSwitcher() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "16px",
+              marginBottom: "14px",
             }}
           >
             <h3
               style={{
                 margin: 0,
                 color: "var(--theme-text)",
-                fontSize: "16px",
+                fontSize: "15px",
                 fontWeight: 700,
               }}
             >
-              选择主题
+              主题选择
             </h3>
-            {isVip.value && (
-              <span class="chip" style={{ color: "var(--theme-primary)" }}>
-                ✨ VIP
+            {isVip.value
+              ? <span class="chip" style={{ color: "var(--theme-primary)" }}>✨ VIP</span>
+              : null}
+          </div>
+
+          {/* AUTO / 手动 切换 */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "6px",
+              padding: "4px",
+              background: "var(--theme-surface)",
+              borderRadius: "var(--theme-border-radius-pill)",
+              marginBottom: "14px",
+            }}
+          >
+            <button
+              onClick={() => setMode("auto")}
+              style={{
+                padding: "6px 12px",
+                borderRadius: "var(--theme-border-radius-pill)",
+                border: "none",
+                background: isAuto.value
+                  ? "var(--theme-surface-strong)"
+                  : "transparent",
+                boxShadow: isAuto.value ? "var(--theme-shadow-sm)" : "none",
+                cursor: "pointer",
+                fontWeight: 600,
+                fontSize: "12px",
+                color: "var(--theme-text)",
+                transition: "all 0.2s var(--theme-ease-out)",
+              }}
+            >
+              ✨ 自动
+            </button>
+            <button
+              onClick={() => setMode("manual")}
+              style={{
+                padding: "6px 12px",
+                borderRadius: "var(--theme-border-radius-pill)",
+                border: "none",
+                background: !isAuto.value
+                  ? "var(--theme-surface-strong)"
+                  : "transparent",
+                boxShadow: !isAuto.value ? "var(--theme-shadow-sm)" : "none",
+                cursor: "pointer",
+                fontWeight: 600,
+                fontSize: "12px",
+                color: "var(--theme-text)",
+                transition: "all 0.2s var(--theme-ease-out)",
+              }}
+            >
+              🎨 手动
+            </button>
+          </div>
+
+          {isAuto.value && (
+            <div
+              style={{
+                padding: "8px 12px",
+                background: "var(--theme-gradient-soft)",
+                borderRadius: "var(--theme-border-radius)",
+                fontSize: "11px",
+                color: "var(--theme-text)",
+                marginBottom: "12px",
+                display: "flex",
+                gap: "6px",
+                alignItems: "center",
+              }}
+            >
+              <span style={{ fontSize: "16px" }}>💡</span>
+              <span>
+                跟随系统: {systemPrefersDark() ? "暗" : "亮"} · 手动选主题自动退出
               </span>
-            )}
+            </div>
+          )}
+
+          <div
+            style={{
+              fontSize: "11px",
+              fontWeight: 600,
+              color: "var(--theme-text-light)",
+              marginBottom: "6px",
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+            }}
+          >
+            ☀️ 浅色
+          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "8px",
+              marginBottom: "14px",
+            }}
+          >
+            {LIGHT_THEMES.map(renderTheme)}
           </div>
 
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))",
-              gap: "12px",
+              fontSize: "11px",
+              fontWeight: 600,
+              color: "var(--theme-text-light)",
+              marginBottom: "6px",
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
             }}
           >
-            {THEMES.map((theme) => {
-              const active = currentTheme.value === theme.id;
-              return (
-                <button
-                  key={theme.id}
-                  onClick={() => switchTheme(theme.id)}
-                  style={{
-                    padding: "12px",
-                    border: active
-                      ? "2px solid var(--theme-primary)"
-                      : "1px solid var(--theme-card-border)",
-                    borderRadius: "var(--theme-border-radius)",
-                    background: "var(--theme-surface)",
-                    cursor: "pointer",
-                    textAlign: "left",
-                    transition: "all 0.2s var(--theme-ease-out)",
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div
-                    style={{
-                      height: "44px",
-                      borderRadius: "var(--theme-border-radius-sm)",
-                      background: theme.gradient,
-                      marginBottom: "8px",
-                      boxShadow: active ? "var(--theme-shadow-glow)" : "none",
-                    }}
-                  />
-                  <div
-                    style={{
-                      fontWeight: 700,
-                      fontSize: "13px",
-                      color: "var(--theme-text)",
-                    }}
-                  >
-                    {theme.name}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "11px",
-                      color: "var(--theme-text-light)",
-                      marginTop: "2px",
-                    }}
-                  >
-                    {theme.description}
-                  </div>
-                  {active && (
-                    <span
-                      style={{
-                        position: "absolute",
-                        top: "8px",
-                        right: "8px",
-                        background: "var(--theme-gradient)",
-                        color: "#fff",
-                        width: "20px",
-                        height: "20px",
-                        borderRadius: "50%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "11px",
-                      }}
-                    >
-                      ✓
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+            🌙 深色
+          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "8px",
+              marginBottom: "14px",
+            }}
+          >
+            {DARK_THEMES.map(renderTheme)}
           </div>
 
           {!isVip.value && (
             <div
               style={{
-                marginTop: "20px",
-                padding: "14px",
+                marginTop: "12px",
+                padding: "12px",
                 background: "var(--theme-gradient-soft)",
                 borderRadius: "var(--theme-border-radius)",
                 fontSize: "12px",
@@ -458,7 +634,7 @@ export default function ThemeSwitcher() {
             >
               {isVip.value
                 ? "已经享受无限切换所有主题"
-                : "解锁全部 4 套主题 · 解锁全部姿势图鉴"}
+                : "解锁全部 5 套主题 · 解锁全部姿势图鉴"}
             </p>
 
             {!isVip.value && (

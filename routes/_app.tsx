@@ -86,7 +86,8 @@ export default function App({ Component }: AppProps) {
         />
 
         <title>{SITE_TITLE}</title>
-        {/* 主题预加载脚本 - 防止主题闪烁 */}
+        {/* toast + theme-init 必须早于 island hydrate, 同步加载 */}
+        <script src="/toast.js"></script>
         <script src="/theme-init.js"></script>
         {/* 全局样式 */}
         <link rel="stylesheet" href="/app.css" />
@@ -97,7 +98,6 @@ export default function App({ Component }: AppProps) {
         <script src="/back-to-top.js" defer></script>
         <script src="/keyboard-nav.js" defer></script>
         <script src="/theme-meta.js" defer></script>
-        <script src="/toast.js" defer></script>
         <script src="/pwa-register.js" defer></script>
       </Head>
       <body>

@@ -3,6 +3,7 @@ import { useSignal } from "@preact/signals";
 import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
 import SeoHead from "../components/SeoHead.tsx";
+import AnimatedCounter from "../islands/animated-counter.tsx";
 
 interface Game {
   emoji: string;
@@ -90,19 +91,19 @@ export default function Home() {
 
         <div class="stats">
           <div class="stat-card">
-            <span class="stat-num">6</span>
+            <AnimatedCounter value={6} className="stat-num" />
             <div class="stat-label">款互动玩法</div>
           </div>
           <div class="stat-card">
-            <span class="stat-num">10+</span>
+            <AnimatedCounter value={9} className="stat-num" />
             <div class="stat-label">任务版本</div>
           </div>
           <div class="stat-card">
-            <span class="stat-num">100+</span>
-            <div class="stat-label">姿势图鉴</div>
+            <span class="stat-num">100</span>
+            <div class="stat-label">+ 姿势图鉴</div>
           </div>
           <div class="stat-card">
-            <span class="stat-num">4</span>
+            <AnimatedCounter value={5} className="stat-num" />
             <div class="stat-label">套主题皮肤</div>
           </div>
         </div>
@@ -122,19 +123,22 @@ export default function Home() {
               >
                 <div
                   style={{
-                    height: "120px",
+                    height: "130px",
                     background: g.gradient,
+                    backgroundSize: "200% 200%",
+                    animation: `gradient-drift 8s ease-in-out infinite`,
+                    animationDelay: `${i * 0.3}s`,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "56px",
+                    fontSize: "60px",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   <span
                     style={{
-                      filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.25))",
+                      filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.3))",
                     }}
                   >
                     {g.emoji}
