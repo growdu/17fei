@@ -1,6 +1,6 @@
 {
-  "themes": ["romantic", "minimal", "playful", "premium"],
+  "themes": ["romantic", "minimal", "playful", "premium", "darkrose"],
   "default": "romantic",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "17fei.fun 主题皮肤系统"
 }

@@ -1,4 +1,4 @@
-import { defineConfig } from "$fresh/twind.ts";
+import { defineConfig } from "@twind/core";
 
 export default defineConfig({
   theme: {

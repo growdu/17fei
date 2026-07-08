@@ -2,47 +2,58 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/171717.tsx";
-import * as $1 from "./routes/_404.tsx";
-import * as $2 from "./routes/_app.tsx";
-import * as $3 from "./routes/about.tsx";
-import * as $4 from "./routes/ai.tsx";
-import * as $5 from "./routes/aiok.tsx";
-import * as $6 from "./routes/card.tsx";
-import * as $7 from "./routes/card_version.tsx";
-import * as $8 from "./routes/custom.tsx";
-import * as $9 from "./routes/greet/[name].tsx";
-import * as $10 from "./routes/index.tsx";
-import * as $11 from "./routes/member.tsx";
-import * as $12 from "./routes/position.tsx";
-import * as $13 from "./routes/positions.tsx";
-import * as $14 from "./routes/unopen.tsx";
-import * as $$0 from "./islands/position-list.tsx";
-import * as $$1 from "./islands/vip.tsx";
+import * as $_171717 from "./routes/171717.tsx";
+import * as $_404 from "./routes/_404.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $about from "./routes/about.tsx";
+import * as $ai from "./routes/ai.tsx";
+import * as $aiok from "./routes/aiok.tsx";
+import * as $api_activate from "./routes/api/activate.ts";
+import * as $api_themes from "./routes/api/themes.ts";
+import * as $card from "./routes/card.tsx";
+import * as $card_version from "./routes/card_version.tsx";
+import * as $custom from "./routes/custom.tsx";
+import * as $greet_name_ from "./routes/greet/[name].tsx";
+import * as $index from "./routes/index.tsx";
+import * as $member from "./routes/member.tsx";
+import * as $position from "./routes/position.tsx";
+import * as $positions from "./routes/positions.tsx";
+import * as $unopen from "./routes/unopen.tsx";
+import * as $card_game from "./islands/card-game.tsx";
+import * as $position_card from "./islands/position-card.tsx";
+import * as $position_list from "./islands/position-list.tsx";
+import * as $theme_switcher from "./islands/theme-switcher.tsx";
+import * as $toast from "./islands/toast.tsx";
+import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/171717.tsx": $0,
-    "./routes/_404.tsx": $1,
-    "./routes/_app.tsx": $2,
-    "./routes/about.tsx": $3,
-    "./routes/ai.tsx": $4,
-    "./routes/aiok.tsx": $5,
-    "./routes/card.tsx": $6,
-    "./routes/card_version.tsx": $7,
-    "./routes/custom.tsx": $8,
-    "./routes/greet/[name].tsx": $9,
-    "./routes/index.tsx": $10,
-    "./routes/member.tsx": $11,
-    "./routes/position.tsx": $12,
-    "./routes/positions.tsx": $13,
-    "./routes/unopen.tsx": $14,
+    "./routes/171717.tsx": $_171717,
+    "./routes/_404.tsx": $_404,
+    "./routes/_app.tsx": $_app,
+    "./routes/about.tsx": $about,
+    "./routes/ai.tsx": $ai,
+    "./routes/aiok.tsx": $aiok,
+    "./routes/api/activate.ts": $api_activate,
+    "./routes/api/themes.ts": $api_themes,
+    "./routes/card.tsx": $card,
+    "./routes/card_version.tsx": $card_version,
+    "./routes/custom.tsx": $custom,
+    "./routes/greet/[name].tsx": $greet_name_,
+    "./routes/index.tsx": $index,
+    "./routes/member.tsx": $member,
+    "./routes/position.tsx": $position,
+    "./routes/positions.tsx": $positions,
+    "./routes/unopen.tsx": $unopen,
   },
   islands: {
-    "./islands/position-list.tsx": $$0,
-    "./islands/vip.tsx": $$1,
+    "./islands/card-game.tsx": $card_game,
+    "./islands/position-card.tsx": $position_card,
+    "./islands/position-list.tsx": $position_list,
+    "./islands/theme-switcher.tsx": $theme_switcher,
+    "./islands/toast.tsx": $toast,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;

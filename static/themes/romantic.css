@@ -1,46 +1,74 @@
-/* 浪漫梦幻主题 - 17fei.fun 默认主题 */
+/* 浪漫梦幻主题 - 17fei.fun 默认主题
+   视觉语言: 玻璃拟态 + 粉紫渐变 + 心形微动效 */
+
 :root {
-  /* 主色调 - 粉色系 */
-  --theme-primary: #ff6b9d;
-  --theme-secondary: #c44569;
-  --theme-accent: #ff8fab;
+  /* ===== 主色系统 ===== */
+  --theme-primary: #ff4d8d;
+  --theme-secondary: #c2255c;
+  --theme-accent: #ffa8c5;
 
-  /* 背景色 */
-  --theme-background: #fff0f5;
-  --theme-background-secondary: #ffe4ec;
+  /* ===== 表面层级 ===== */
+  --theme-background: #fff0f6;
+  --theme-background-secondary: #ffe4ee;
+  --theme-surface: rgba(255, 255, 255, 0.65);
+  --theme-surface-strong: rgba(255, 255, 255, 0.85);
+  --theme-surface-elevated: rgba(255, 255, 255, 0.95);
 
-  /* 文字色 */
-  --theme-text: #4a4a4a;
-  --theme-text-light: #8a6c6c;
+  /* ===== 文字 ===== */
+  --theme-text: #2f1b2d;
+  --theme-text-light: #80506c;
+  --theme-text-muted: rgba(47, 27, 45, 0.55);
 
-  /* 卡片 */
-  --theme-card-bg: #ffffff;
-  --theme-card-border: rgba(255,107,157,0.2);
+  /* ===== 卡片 ===== */
+  --theme-card-bg: rgba(255, 255, 255, 0.7);
+  --theme-card-border: rgba(255, 77, 141, 0.18);
+  --theme-card-shadow: 0 8px 32px rgba(255, 77, 141, 0.18);
+  --theme-card-shadow-hover: 0 16px 48px rgba(255, 77, 141, 0.28);
 
-  /* 渐变 */
-  --theme-gradient-start: #ff6b9d;
-  --theme-gradient-end: #c44569;
-  --theme-gradient: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+  /* ===== 玻璃叠层 ===== */
+  --theme-glass-bg: rgba(255, 255, 255, 0.55);
+  --theme-glass-border: rgba(255, 255, 255, 0.35);
+  --theme-glass-blur: 18px;
 
-  /* 圆角 */
-  --theme-border-radius: 16px;
-  --theme-border-radius-sm: 8px;
+  /* ===== 渐变 ===== */
+  --theme-gradient-start: #ff4d8d;
+  --theme-gradient-end: #c2255c;
+  --theme-gradient: linear-gradient(135deg, #ff4d8d 0%, #c2255c 100%);
+  --theme-gradient-soft: linear-gradient(135deg, #ffd9e8 0%, #ffa8c5 100%);
+  --theme-mesh: radial-gradient(at 12% 20%, #ffd1e0 0px, transparent 45%),
+                radial-gradient(at 90% 10%, #ffe1ec 0px, transparent 50%),
+                radial-gradient(at 50% 95%, #ffc2da 0px, transparent 55%);
 
-  /* 阴影 */
-  --theme-shadow: 0 4px 20px rgba(255,107,157,0.3);
-  --theme-shadow-hover: 0 8px 30px rgba(255,107,157,0.4);
+  /* ===== 圆角 ===== */
+  --theme-radius-xs: 6px;
+  --theme-border-radius-sm: 12px;
+  --theme-border-radius: 20px;
+  --theme-border-radius-lg: 28px;
+  --theme-border-radius-pill: 999px;
 
-  /* 动画 */
-  --theme-transition: 0.3s ease;
-  --theme-animation: pulse 2s ease-in-out infinite;
+  /* ===== 阴影 ===== */
+  --theme-shadow-sm: 0 2px 8px rgba(255, 77, 141, 0.1);
+  --theme-shadow: 0 8px 24px rgba(255, 77, 141, 0.2);
+  --theme-shadow-lg: 0 20px 60px rgba(194, 37, 92, 0.25);
+  --theme-shadow-glow: 0 0 32px rgba(255, 77, 141, 0.4);
 
-  /* 按钮 */
-  --theme-btn-bg: linear-gradient(135deg, #ff6b9d, #c44569);
-  --theme-btn-hover-bg: linear-gradient(135deg, #ff8fab, #d65a7d);
+  /* ===== 动画曲线 ===== */
+  --theme-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --theme-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --theme-transition: 0.35s var(--theme-ease-out);
+  --theme-transition-fast: 0.18s var(--theme-ease-out);
 
-  /* 粒子效果 */
+  /* ===== 按钮 ===== */
+  --theme-btn-bg: linear-gradient(135deg, #ff4d8d 0%, #c2255c 100%);
+  --theme-btn-bg-hover: linear-gradient(135deg, #ff6ba3 0%, #d63a73 100%);
+  --theme-btn-text: #ffffff;
+  --theme-btn-shadow: 0 8px 24px rgba(255, 77, 141, 0.35);
+
+  /* ===== 粒子 / 装饰 ===== */
   --theme-particle-enabled: true;
+  --theme-particle-color: rgba(255, 77, 141, 0.4);
+  --theme-icon-border-radius: 18px;
 
-  /* 图标风格 */
-  --theme-icon-border-radius: 50%;
+  /* ===== 焦点环 ===== */
+  --theme-focus-ring: 0 0 0 4px rgba(255, 77, 141, 0.25);
 }

@@ -1,0 +1,592 @@
+/* 17fei.fun 全局样式
+   依赖主题 CSS 的 CSS 变量,实现跨主题玻璃拟态 + 动效一致体验 */
+
+/* ===== Reset & 基础排版 ===== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+               "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--theme-text);
+  background: var(--theme-background);
+  background-image: var(--theme-mesh);
+  background-attachment: fixed;
+  transition: color var(--theme-transition),
+              background-color var(--theme-transition);
+}
+
+a {
+  color: var(--theme-primary);
+  text-decoration: none;
+  transition: color var(--theme-transition-fast);
+}
+
+a:hover {
+  color: var(--theme-secondary);
+}
+
+/* 键盘焦点: 不用浏览器默认丑 outline */
+*:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+  border-radius: var(--theme-border-radius-sm, 6px);
+}
+
+/* skip link 跳过导航直达内容 */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  padding: 8px 16px;
+  background: var(--theme-surface-elevated);
+  border: 1px solid var(--theme-card-border);
+  border-radius: var(--theme-border-radius-sm, 8px);
+  z-index: 99999;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  left: 8px;
+}
+
+/* ===== 通用动画关键帧 ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--theme-particle-color); }
+  50% { box-shadow: 0 0 24px 6px var(--theme-particle-color); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes confetti-pop {
+  0% { opacity: 1; transform: scale(0.5) rotate(0deg); }
+  100% { opacity: 0; transform: scale(1.4) rotate(720deg) translateY(120px); }
+}
+
+/* ===== 玻璃组件 ===== */
+.glass {
+  background: var(--theme-glass-bg);
+  backdrop-filter: blur(var(--theme-glass-blur)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--theme-glass-blur)) saturate(160%);
+  border: 1px solid var(--theme-glass-border);
+  border-radius: var(--theme-border-radius-lg);
+  box-shadow: var(--theme-card-shadow);
+}
+
+/* ===== Page 容器 ===== */
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+  animation: fade-up 0.45s var(--theme-ease-out);
+}
+
+.page-narrow {
+  max-width: 640px;
+}
+
+/* ===== Hero ===== */
+.hero {
+  text-align: center;
+  padding: 56px 24px 40px;
+  position: relative;
+}
+
+.hero-title {
+  font-size: clamp(36px, 8vw, 60px);
+  font-weight: 800;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+  background: var(--theme-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fade-up 0.6s var(--theme-ease-out);
+}
+
+.hero-subtitle {
+  font-size: clamp(14px, 3vw, 18px);
+  color: var(--theme-text-light);
+  margin: 0 0 24px;
+  animation: fade-up 0.6s var(--theme-ease-out) 0.1s both;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--theme-surface-strong);
+  border: 1px solid var(--theme-card-border);
+  border-radius: var(--theme-border-radius-pill);
+  color: var(--theme-text-light);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.hero-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  display: block;
+  border-radius: var(--theme-icon-border-radius, 18px);
+  box-shadow: var(--theme-shadow);
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ===== 卡片网格 ===== */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+
+.game-card {
+  position: relative;
+  padding: 24px;
+  background: var(--theme-card-bg);
+  backdrop-filter: blur(var(--theme-glass-blur));
+  border: 1px solid var(--theme-card-border);
+  border-radius: var(--theme-border-radius-lg);
+  box-shadow: var(--theme-card-shadow);
+  transition: transform var(--theme-transition),
+              box-shadow var(--theme-transition),
+              border-color var(--theme-transition);
+  overflow: hidden;
+  cursor: pointer;
+  animation: fade-up 0.5s var(--theme-ease-out) both;
+  display: block;
+}
+
+a.game-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--theme-card-shadow-hover);
+  border-color: var(--theme-primary);
+  color: inherit;
+}
+
+.game-card:active {
+  transform: translateY(-1px);
+}
+
+.game-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--theme-gradient-soft);
+  opacity: 0;
+  transition: opacity var(--theme-transition);
+  pointer-events: none;
+}
+
+.game-card:hover::before {
+  opacity: 0.6;
+}
+
+.game-card-emoji {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.game-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--theme-text);
+  position: relative;
+  z-index: 1;
+}
+
+.game-card-desc {
+  font-size: 14px;
+  color: var(--theme-text-light);
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.game-card-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--theme-primary);
+  background: var(--theme-surface-strong);
+  border: 1px solid var(--theme-card-border);
+  border-radius: var(--theme-border-radius-pill);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 通用按钮 ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--theme-border-radius-pill);
+  background: var(--theme-btn-bg);
+  color: var(--theme-btn-text);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--theme-btn-shadow);
+  transition: transform var(--theme-transition-fast),
+              box-shadow var(--theme-transition-fast),
+              filter var(--theme-transition-fast);
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+  filter: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--theme-primary);
+  border: 1px solid var(--theme-card-border);
+  box-shadow: none;
+}
+
+.btn-ghost:hover {
+  background: var(--theme-surface);
+  filter: none;
+  color: var(--theme-primary);
+}
+
+/* ===== Section ===== */
+.section {
+  padding: 32px 0;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--theme-text);
+}
+
+.section-heading::before {
+  content: "";
+  width: 4px;
+  height: 20px;
+  border-radius: 2px;
+  background: var(--theme-gradient);
+}
+
+.section-text {
+  color: var(--theme-text-light);
+  line-height: 1.7;
+}
+
+/* ===== Glow divider ===== */
+.glow-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--theme-primary), transparent);
+  opacity: 0.4;
+  margin: 32px 0;
+}
+
+/* ===== Stats / counter ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 20px 12px;
+  background: var(--theme-card-bg);
+  border: 1px solid var(--theme-card-border);
+  border-radius: var(--theme-border-radius);
+  box-shadow: var(--theme-card-shadow);
+}
+
+.stat-num {
+  font-size: 28px;
+  font-weight: 800;
+  background: var(--theme-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--theme-text-light);
+  margin-top: 6px;
+}
+
+/* ===== Form ===== */
+.form-card {
+  background: var(--theme-card-bg);
+  backdrop-filter: blur(var(--theme-glass-blur));
+  border: 1px solid var(--theme-card-border);
+  border-radius: var(--theme-border-radius-lg);
+  padding: 32px;
+  box-shadow: var(--theme-card-shadow);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--theme-card-border);
+  border-radius: var(--theme-border-radius-sm);
+  background: var(--theme-surface-strong);
+  color: var(--theme-text);
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color var(--theme-transition-fast),
+              box-shadow var(--theme-transition-fast);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--theme-primary);
+  box-shadow: var(--theme-focus-ring);
+}
+
+.field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--theme-text-light);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field .helper {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--theme-text-muted);
+}
+
+.field-error {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #e53e3e;
+}
+
+/* ===== Tag chip ===== */
+.chip {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--theme-border-radius-pill);
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-card-border);
+  font-size: 12px;
+  color: var(--theme-text-light);
+  margin: 2px;
+}
+
+/* ===== Toast ===== */
+.toast-container {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.toast {
+  padding: 12px 20px;
+  background: var(--theme-surface-elevated);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--theme-card-border);
+  border-radius: var(--theme-border-radius-pill);
+  box-shadow: var(--theme-shadow-lg);
+  color: var(--theme-text);
+  font-size: 14px;
+  animation: fade-up 0.3s var(--theme-ease-out);
+  max-width: 90vw;
+}
+
+/* ===== Confetti for VIP unlock ===== */
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 14px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 9998;
+  animation: confetti-pop 1.6s ease-out forwards;
+}
+
+/* ===== 移动响应 ===== */
+@media (max-width: 640px) {
+  .page {
+    padding: 20px 14px 60px;
+  }
+  .hero {
+    padding: 32px 12px 24px;
+  }
+  .game-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .form-card {
+    padding: 20px;
+  }
+  .keyboard-hint {
+    display: none;
+  }
+}
+
+/* ===== 桌面端键盘提示 ===== */
+.keyboard-hint {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  padding: 6px 12px;
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-card-border);
+  border-radius: var(--theme-border-radius-pill);
+  font-size: 11px;
+  color: var(--theme-text-muted);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+.keyboard-hint kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  margin: 0 2px;
+  background: var(--theme-surface-strong);
+  border: 1px solid var(--theme-card-border);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+/* ===== a11y ===== */
+
+/* 用户偏好减少动画: 关闭所有 transition & keyframe */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-logo {
+    animation: none;
+  }
+}
+
+/* 用户偏好提高对比: 加深边框 + 文字 */
+@media (prefers-contrast: more) {
+  :root {
+    --theme-card-border: currentColor;
+  }
+  .game-card {
+    border-width: 2px;
+  }
+  .btn {
+    border: 2px solid currentColor;
+  }
+}
+
+/* 强制色: 用透明让系统强调色生效 */
+@media (forced-colors: active) {
+  .hero-title,
+  .stat-num {
+    -webkit-text-fill-color: CanvasText;
+    background: none;
+    color: CanvasText;
+  }
+  .glass,
+  .game-card,
+  .form-card,
+  .stat-card {
+    border: 1px solid CanvasText;
+    backdrop-filter: none;
+    background: Canvas;
+  }
+}
+
+/* 暗色偏好支持: 给未加载主题 CSS 时的 fallback
+   当用户系统偏暗色但还没选主题时,可以给一个高对比暗色背景 */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme-loaded]) {
+    color-scheme: dark;
+  }
+}

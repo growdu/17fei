@@ -1,47 +1,62 @@
-/* 活泼可爱主题 - 17fei.fun */
+/* 活泼可爱主题 - 17fei.fun
+   视觉语言: 橙色系 + 圆润 + 弹性曲线 */
+
 :root {
-  /* 主色调 - 明快橙黄 */
   --theme-primary: #ff922b;
-  --theme-secondary: #ff7b00;
-  --theme-accent: #ffa94d;
+  --theme-secondary: #f76707;
+  --theme-accent: #ffb066;
 
-  /* 背景色 */
-  --theme-background: #fff9db;
+  --theme-background: #fff8e6;
   --theme-background-secondary: #fff3bf;
+  --theme-surface: rgba(255, 255, 255, 0.75);
+  --theme-surface-strong: rgba(255, 255, 255, 0.9);
+  --theme-surface-elevated: #ffffff;
 
-  /* 文字色 */
-  --theme-text: #495057;
-  --theme-text-light: #868e96;
+  --theme-text: #4a2e0a;
+  --theme-text-light: #8b5a1c;
+  --theme-text-muted: rgba(74, 46, 10, 0.55);
 
-  /* 卡片 */
-  --theme-card-bg: #ffffff;
-  --theme-card-border: rgba(255,146,43,0.2);
+  --theme-card-bg: rgba(255, 255, 255, 0.8);
+  --theme-card-border: rgba(255, 146, 43, 0.2);
+  --theme-card-shadow: 0 8px 24px rgba(255, 146, 43, 0.18);
+  --theme-card-shadow-hover: 0 16px 40px rgba(255, 146, 43, 0.28);
 
-  /* 渐变 */
+  --theme-glass-bg: rgba(255, 255, 255, 0.6);
+  --theme-glass-border: rgba(255, 146, 43, 0.15);
+  --theme-glass-blur: 16px;
+
   --theme-gradient-start: #ff922b;
-  --theme-gradient-end: #ff7b00;
-  --theme-gradient: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+  --theme-gradient-end: #f76707;
+  --theme-gradient: linear-gradient(135deg, #ff922b 0%, #f76707 100%);
+  --theme-gradient-soft: linear-gradient(135deg, #ffe8cc 0%, #ffd8a8 100%);
+  --theme-mesh: radial-gradient(at 15% 20%, #ffd8a8 0px, transparent 50%),
+                radial-gradient(at 85% 80%, #ffe8cc 0px, transparent 55%),
+                radial-gradient(at 50% 100%, #fff3bf 0px, transparent 60%);
 
-  /* 圆角 */
-  --theme-border-radius: 20px;
-  --theme-border-radius-sm: 12px;
+  --theme-radius-xs: 8px;
+  --theme-border-radius-sm: 14px;
+  --theme-border-radius: 22px;
+  --theme-border-radius-lg: 32px;
+  --theme-border-radius-pill: 999px;
 
-  /* 阴影 */
-  --theme-shadow: 0 4px 12px rgba(255,146,43,0.25);
-  --theme-shadow-hover: 0 6px 20px rgba(255,146,43,0.35);
+  --theme-shadow-sm: 0 2px 8px rgba(255, 146, 43, 0.12);
+  --theme-shadow: 0 10px 28px rgba(255, 146, 43, 0.22);
+  --theme-shadow-lg: 0 24px 60px rgba(247, 103, 7, 0.3);
+  --theme-shadow-glow: 0 0 32px rgba(255, 146, 43, 0.4);
 
-  /* 动画 */
-  --theme-transition: 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  --theme-animation: bounce 1s ease-in-out infinite;
+  --theme-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --theme-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --theme-transition: 0.3s var(--theme-ease);
+  --theme-transition-fast: 0.18s var(--theme-ease);
 
-  /* 按钮 */
-  --theme-btn-bg: linear-gradient(135deg, #ff922b, #ff7b00);
-  --theme-btn-hover-bg: linear-gradient(135deg, #ffa94d, #ff922b);
+  --theme-btn-bg: linear-gradient(135deg, #ff922b 0%, #f76707 100%);
+  --theme-btn-bg-hover: linear-gradient(135deg, #ffac4d 0%, #ff922b 100%);
+  --theme-btn-text: #ffffff;
+  --theme-btn-shadow: 0 8px 24px rgba(255, 146, 43, 0.35);
 
-  /* 粒子效果 */
   --theme-particle-enabled: true;
-  --theme-particle-color: #ff922b;
-
-  /* 图标风格 */
+  --theme-particle-color: rgba(255, 146, 43, 0.4);
   --theme-icon-border-radius: 30%;
+
+  --theme-focus-ring: 0 0 0 4px rgba(255, 146, 43, 0.25);
 }

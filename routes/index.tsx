@@ -1,31 +1,210 @@
 import { useSignal } from "@preact/signals";
 
-import Footer from '../components/Footer.tsx'
+import Container from "../components/Container.tsx";
+import Footer from "../components/Footer.tsx";
+
+interface Game {
+  emoji: string;
+  title: string;
+  desc: string;
+  href: string;
+  tag?: string;
+  gradient: string;
+}
+
+const GAMES: Game[] = [
+  {
+    emoji: "🎲",
+    title: "飞行棋",
+    desc: "经典双人对战，掷骰子走格子",
+    href: "/fxq/index.html",
+    tag: "经典",
+    gradient: "linear-gradient(135deg, #ff4d8d, #f76707)",
+  },
+  {
+    emoji: "🃏",
+    title: "任务卡牌",
+    desc: "轮流抽卡，挑战甜蜜任务",
+    href: "/card",
+    tag: "热门",
+    gradient: "linear-gradient(135deg, #9775fa, #ff4d8d)",
+  },
+  {
+    emoji: "💃",
+    title: "姿势卡牌",
+    desc: "随机姿势抽卡 + 评分",
+    href: "/position",
+    tag: "VIP",
+    gradient: "linear-gradient(135deg, #ff922b, #f03e6d)",
+  },
+  {
+    emoji: "📚",
+    title: "姿势大全",
+    desc: "上百个姿势配图教学",
+    href: "/positions",
+    tag: "VIP",
+    gradient: "linear-gradient(135deg, #4263eb, #5c7cfa)",
+  },
+  {
+    emoji: "✨",
+    title: "AI 伴侣",
+    desc: "懂你、可撩、定制的虚拟陪伴",
+    href: "/ai",
+    tag: "新品",
+    gradient: "linear-gradient(135deg, #20c997, #1098ad)",
+  },
+  {
+    emoji: "💎",
+    title: "会员空间",
+    desc: "解锁全部姿势 / 主题 / 私密内容",
+    href: "/member",
+    tag: "会员",
+    gradient: "linear-gradient(135deg, #f59f00, #ff4d8d)",
+  },
+];
 
 export default function Home() {
   return (
-    <div class="p-2 w-full leading-8 min-h-screen text-shadow bg-pink-400 text-lg text-red-100">
-      <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <h1 class="text-4xl font-bold my-16">情侣情趣飞行棋</h1>
-        <img src="/logo.png" class="w-16 h-16" />
-        <h2 class="my-4">最新自由定制版即将发布</h2>
-        <div class="text-left leading-8 font-black mt-8">
-          <div>1. 自由定制棋盘内容</div>
-          <div>2. 预设不同阶段互动内容 恋爱，情趣，好玩。满足各种口味快速开局。</div>
-          <div>3. 获取源码定制，一键接入自有app小程序, 公众号</div>
+    <>
+      <Container>
+        <header class="hero">
+          <img src="/logo.png" alt="logo" class="hero-logo" />
+          <span class="hero-badge">✨ 情侣专属 · 飞行棋 / 卡牌 / 姿势图鉴</span>
+          <h1 class="hero-title">情侣情趣飞行棋</h1>
+          <p class="hero-subtitle">
+            飞行棋 · 任务卡 · 姿势图鉴 · AI 陪伴
+            <br />
+            一站式私密游乐场，让爱更有趣
+          </p>
+          <div style={{ marginTop: "24px" }}>
+            <a href="#games" class="btn">立即开始 →</a>
+          </div>
+        </header>
+
+        <div class="stats">
+          <div class="stat-card">
+            <span class="stat-num">6</span>
+            <div class="stat-label">款互动玩法</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">10+</span>
+            <div class="stat-label">任务版本</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">100+</span>
+            <div class="stat-label">姿势图鉴</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">4</span>
+            <div class="stat-label">套主题皮肤</div>
+          </div>
         </div>
-        <div class="text-center mt-8">
-          <div class="font-black my-4">游戏列表</div>
-          <a href="/fxq/index.html" class="block px-4 my-4 border rounded bg-pink-600 underline w-60">飞行棋</a>
-          <a href="/card" class="block px-4 my-4 border rounded bg-pink-600 underline w-60">任务卡牌</a>
-          <a href="/position" class="block px-4 my-4 border rounded bg-pink-600 underline w-60">姿势卡牌</a>
-          <a href="/positions" class="block px-4 my-4 border rounded bg-pink-600 underline w-60">姿势大全</a>
-          <a href="/member" class="block px-4 my-4 border rounded bg-pink-600 underline w-60">会员空间</a>
-          <a href="/ai" class="block px-4 my-4 border rounded bg-pink-600 underline w-60">AI伴侣</a>
-        </div>
-        <div class="my-8">支持android，ios，平板，电脑等设备访问</div>
-      </div>
-      <Footer></Footer>
-    </div>
+
+        <section class="section" id="games">
+          <h2 class="section-heading">游戏列表</h2>
+          <div class="game-grid">
+            {GAMES.map((g, i) => (
+              <a
+                href={g.href}
+                class="game-card"
+                style={{
+                  animationDelay: `${0.05 * (i + 1)}s`,
+                  padding: 0,
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    height: "120px",
+                    background: g.gradient,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "56px",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  <span
+                    style={{
+                      filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.25))",
+                    }}
+                  >
+                    {g.emoji}
+                  </span>
+                  {g.tag && (
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        padding: "2px 10px",
+                        background: "rgba(0,0,0,0.18)",
+                        color: "#fff",
+                        borderRadius: "var(--theme-border-radius-pill)",
+                        fontSize: "11px",
+                        fontWeight: 600,
+                        backdropFilter: "blur(8px)",
+                      }}
+                    >
+                      {g.tag}
+                    </span>
+                  )}
+                </div>
+                <div style={{ padding: "16px 20px" }}>
+                  <h3 class="game-card-title" style={{ marginBottom: "4px" }}>
+                    {g.title}
+                  </h3>
+                  <p class="game-card-desc" style={{ fontSize: "13px" }}>
+                    {g.desc}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <div class="glow-divider"></div>
+
+        <section class="section">
+          <h2 class="section-heading">为什么选择 17fei</h2>
+          <div class="game-grid">
+            <div class="game-card">
+              <span class="game-card-emoji">🔒</span>
+              <h3 class="game-card-title">隐私优先</h3>
+              <p class="game-card-desc">
+                无需注册、不收集隐私，本地存储，所有数据只在你浏览器
+              </p>
+            </div>
+            <div class="game-card">
+              <span class="game-card-emoji">🎨</span>
+              <h3 class="game-card-title">丰富皮肤</h3>
+              <p class="game-card-desc">
+                4 套主题皮肤，每天还能免费试用 3 次不同的颜色心情
+              </p>
+            </div>
+            <div class="game-card">
+              <span class="game-card-emoji">📱</span>
+              <h3 class="game-card-title">全设备兼容</h3>
+              <p class="game-card-desc">
+                iOS / Android / 平板 / 电脑 / 微信内置浏览器全支持
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <div class="glow-divider"></div>
+
+        <section class="section">
+          <h2 class="section-heading">友邻玩法</h2>
+          <p class="section-text">
+            玩法参考自网络开源与公开资料；
+            本项目做内容聚合 + 重新美化 + 工程化整合，无版权素材来自网络。
+            如有版权问题请 微信: wbot10 联系删除。
+          </p>
+        </section>
+      </Container>
+      <Footer />
+    </>
   );
 }

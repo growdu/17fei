@@ -1,74 +1,147 @@
 import { Head } from "$fresh/runtime.ts";
-import { render } from "preact";
-
+import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
 
 export const handler = {
-    async GET(req, ctx) {
-        return await ctx.render();
-    },
-    async POST(req: Request, ctx) {
-        const form = await req.formData();
+  async GET(req, ctx) {
+    return await ctx.render();
+  },
+  async POST(req: Request, ctx) {
+    try {
+      const form = await req.formData();
 
-        const subuser = {
-            email: form.get("email").toString(),
-            aisex: form.get("aisex").toString(),
-        };
-        let kv = await Deno.openKv();
-        await kv.set(["subusers", subuser.email], subuser.aisex);
-        return Response.redirect(req.headers.get("origin") + "/aiok");
-    },
+      const email = (form.get("email")?.toString() ?? "").trim();
+      const aisex = (form.get("aisex")?.toString() ?? "").trim();
+
+      if (!email || !aisex) {
+        return new Response("Missing email or sex", { status: 400 });
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return new Response("Invalid email", { status: 400 });
+      }
+
+      const kv = await Deno.openKv();
+      await kv.set(["subusers", email], aisex);
+      return Response.redirect(req.headers.get("origin") + "/aiok");
+    } catch (err) {
+      console.error("AI subscribe error:", err);
+      return new Response("Server error", { status: 500 });
+    }
+  },
 };
 export default function AI() {
     return (
         <>
             <Head>
-                <title>17fei会员空间</title>
+                <title>AI 伴侣 · 17fei</title>
             </Head>
-            <div class="w-full leading-8 p-2 min-h-screen text-shadow bg-pink-400 text-lg text-red-100">
-                <div class="max-w-screen-md mx-auto p-4">
-                    <div class="p-2 text-center w-full">
-                        <a class="block mx-auto" href="/">
-                            <img src="/logo.png" class="w-12 h-12" />
-                        </a>
+            <Container narrow>
+                <header class="hero">
+                    <div style={{ fontSize: "72px", marginBottom: "16px" }}>🤖</div>
+                    <span class="hero-badge">即将上线</span>
+                    <h1 class="hero-title">AI 伴侣</h1>
+                    <p class="hero-subtitle">
+                        懂你 · 可撩 · 力所能及地满足各种需求
+                    </p>
+                </header>
 
-                        <div class="text-xs">
-                            一个AI情侣，懂你，可撩，力所能及的满足各种需求。
+                <section class="form-card">
+                    <h2 class="section-heading">抢先试用</h2>
+                    <p class="section-text" style={{ marginTop: "12px" }}>
+                        留下邮箱 + 期望的性别，我们将在 AI 伴侣上线后第一时间通知你。
+                    </p>
+                    <form method="POST" style={{ marginTop: "24px" }} novalidate>
+                        <div class="field">
+                            <label class="field-label" for="email">邮箱</label>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                class="input"
+                                placeholder="you@example.com"
+                                required
+                                autoComplete="email"
+                            />
+                            <div class="helper">用于发送 AI 伴侣上线通知,绝不用作其他用途</div>
+                        </div>
+
+                        <div class="field">
+                            <label class="field-label">希望 AI 是</label>
+                            <div
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "1fr 1fr",
+                                    gap: "12px",
+                                }}
+                            >
+                                <label
+                                    style={{
+                                        padding: "16px",
+                                        border: "1px solid var(--theme-card-border)",
+                                        borderRadius: "var(--theme-border-radius)",
+                                        background: "var(--theme-surface-strong)",
+                                        cursor: "pointer",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    <input
+                                        type="radio"
+                                        name="aisex"
+                                        value="1"
+                                        checked
+                                        style={{ marginRight: "8px" }}
+                                    />
+                                    👩 女伴侣
+                                </label>
+                                <label
+                                    style={{
+                                        padding: "16px",
+                                        border: "1px solid var(--theme-card-border)",
+                                        borderRadius: "var(--theme-border-radius)",
+                                        background: "var(--theme-surface-strong)",
+                                        cursor: "pointer",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    <input
+                                        type="radio"
+                                        name="aisex"
+                                        value="2"
+                                        style={{ marginRight: "8px" }}
+                                    />
+                                    👨 男伴侣
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="btn" type="submit" style={{ width: "100%" }}>
+                            🚀 登记排队
+                        </button>
+                    </form>
+                </section>
+
+                <section class="section" style={{ marginTop: "32px" }}>
+                    <h2 class="section-heading">我们能做什么</h2>
+                    <div class="game-grid" style={{ marginTop: "16px" }}>
+                        <div class="game-card">
+                            <span class="game-card-emoji">💬</span>
+                            <h3 class="game-card-title">日常聊天</h3>
+                            <p class="game-card-desc">陪伴你聊天解闷，永远不会不耐烦</p>
+                        </div>
+                        <div class="game-card">
+                            <span class="game-card-emoji">🎭</span>
+                            <h3 class="game-card-title">角色扮演</h3>
+                            <p class="game-card-desc">多场景剧本，沉浸式互动体验</p>
+                        </div>
+                        <div class="game-card">
+                            <span class="game-card-emoji">💡</span>
+                            <h3 class="game-card-title">个性化</h3>
+                            <p class="game-card-desc">记忆偏好，越来越懂你</p>
                         </div>
                     </div>
-                    <form
-                        class="max-w-md mx-auto border rounded p-4 text-xs bg-blue-50 text-gray-700 mt-4"
-                        method="POST"
-                    >
-                        <div class="flex items-center">
-                            <div class="w-20">订阅邮箱：</div>
-                            <input
-                                name="email"
-                                class="border rounded p-1"
-                                placeholder="邮箱"
-                            ></input>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-20">希望获得：</div>
-                            <select name="aisex" class="text-gray-700 p-1 mt-2">
-                                <option value="1" checked>
-                                    女伴侣
-                                </option>
-                                <option value="2">男伴侣</option>
-                            </select>
-                        </div>
-                        <div class="mt-2 flex items-center">
-                            <div class="w-20"></div>
-                            <button
-                                class="bg-blue-600 rounded p-1 text-white"
-                                type="submit"
-                            >
-                                登记试用
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                </section>
+            </Container>
+            <Footer />
         </>
     );
 }

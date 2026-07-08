@@ -1,0 +1,64 @@
+/* 暗夜玫瑰主题 - 17fei.fun
+   视觉语言: 深底玫红 + 玻璃磨砂 + 高质感 */
+
+:root {
+  --theme-primary: #ff6b9d;
+  --theme-secondary: #cc3370;
+  --theme-accent: #ff9ec1;
+
+  --theme-background: #1a0e1a;
+  --theme-background-secondary: #2a1a2a;
+  --theme-surface: rgba(45, 25, 40, 0.55);
+  --theme-surface-strong: rgba(45, 25, 40, 0.85);
+  --theme-surface-elevated: rgba(35, 20, 32, 0.95);
+
+  --theme-text: #f3e8ee;
+  --theme-text-light: #c9a8b8;
+  --theme-text-muted: rgba(243, 232, 238, 0.5);
+
+  --theme-card-bg: rgba(35, 20, 32, 0.65);
+  --theme-card-border: rgba(255, 107, 157, 0.25);
+  --theme-card-shadow: 0 8px 32px rgba(255, 107, 157, 0.15);
+  --theme-card-shadow-hover: 0 16px 48px rgba(255, 107, 157, 0.3);
+
+  --theme-glass-bg: rgba(35, 20, 32, 0.45);
+  --theme-glass-border: rgba(255, 107, 157, 0.18);
+  --theme-glass-blur: 20px;
+
+  --theme-gradient-start: #ff6b9d;
+  --theme-gradient-end: #cc3370;
+  --theme-gradient: linear-gradient(135deg, #ff6b9d 0%, #cc3370 100%);
+  --theme-gradient-soft: linear-gradient(135deg, rgba(255,107,157,0.18) 0%, rgba(204,51,112,0.18) 100%);
+  --theme-mesh: radial-gradient(at 15% 15%, rgba(255,107,157,0.18) 0px, transparent 45%),
+                radial-gradient(at 85% 80%, rgba(204,51,112,0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(26,14,26,1) 0px, transparent 60%);
+
+  --theme-radius-xs: 6px;
+  --theme-border-radius-sm: 12px;
+  --theme-border-radius: 20px;
+  --theme-border-radius-lg: 28px;
+  --theme-border-radius-pill: 999px;
+
+  --theme-shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --theme-shadow: 0 10px 28px rgba(0,0,0,0.4);
+  --theme-shadow-lg: 0 24px 60px rgba(255, 107, 157, 0.25);
+  --theme-shadow-glow: 0 0 32px rgba(255, 107, 157, 0.4);
+
+  --theme-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --theme-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --theme-transition: 0.35s var(--theme-ease-out);
+  --theme-transition-fast: 0.18s var(--theme-ease-out);
+
+  --theme-btn-bg: linear-gradient(135deg, #ff6b9d 0%, #cc3370 100%);
+  --theme-btn-bg-hover: linear-gradient(135deg, #ff85ad 0%, #e04785 100%);
+  --theme-btn-text: #1a0e1a;
+  --theme-btn-shadow: 0 8px 28px rgba(255, 107, 157, 0.45);
+
+  --theme-particle-enabled: true;
+  --theme-particle-color: rgba(255, 107, 157, 0.5);
+  --theme-icon-border-radius: 18px;
+
+  --theme-focus-ring: 0 0 0 4px rgba(255, 107, 157, 0.3);
+
+  color-scheme: dark;
+}

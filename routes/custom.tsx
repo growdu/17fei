@@ -1,38 +1,81 @@
+import Container from "../components/Container.tsx";
+import Footer from "../components/Footer.tsx";
+
 export default function Custom() {
-    return (
-        <div class="w-full p-2 leading-8 min-h-screen text-shadow bg-pink-300 text-lg text-red-100">
-            <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-                <div class="p-2 flex items-center w-full">
-                    <a class="flex-1" href="/">
-                        <img src="/logo.png" class="w-12 h-12" />
-                    </a>
-                </div>
-                <div class="leading-8 text-gray-900 max-w-lg mt-8 max-auto">
-                    <div class="text-lg text-gray-500">本网站怎么赚钱</div>
-                    <div class="my-4">
-                        这个网站其实不怎么赚钱，
-                        但是好处是不用太大成本。人人都可以玩。
-                        <div>
-                            网站纯静态，只要修改收款和客服信息和logo名字就可以拥有一个属于自己的情侣游戏网站。
-                        </div>
-                        如果你开通过会员，
-                        就知道人工收款过程，虽然对于用户体验不是很好，但是赚点小钱这样足够了。
-                        <p>
-                            网站目前每个月的收入大概在400~800左右，主要是小红书的笔记带来的流量。其实网站做好后我放置一段时间，因为小红书的笔记管理很严格，感觉没法玩。
-                            但直到一篇老笔记被官方翻牌，收获几十个红心。就这么一点点流量其实就可以带来每月几百块的收入了，近期我又偶尔更新一下笔记，但是效果很随机, 我还没有找到窍门吧。
-                        </p>
-                        如果你也想搭建一个，
-                        我可以把所有流程和代码发你，并且帮你上线部署。
-                        全程除了你自己的域名购买，
-                        没有二次收费。服务器都是用免费的就可以，不用备案，目前很稳。
-                        <p>网站主要有飞行棋和姿势卡两个变现的内容为主</p>
-                        <p>
-                            搭建一个收200元，会流量玩法的可以弄一下，我也偷师学习一下。
-                        </p>
-                        <p class="font-black">加微信 wbot10</p>
-                    </div>
-                </div>
+  return (
+    <>
+      <Container narrow>
+        <header class="hero">
+          <span class="hero-badge">站长笔记</span>
+          <h1 class="hero-title">站长怎么赚钱</h1>
+          <p class="hero-subtitle">从 0 到月入几百块，我在小红书的踩坑记录</p>
+        </header>
+
+        <section class="form-card">
+          <h2 class="section-heading">坦诚说: 不太赚钱</h2>
+          <p class="section-text" style={{ marginTop: "16px" }}>
+            这个网站其实不怎么赚钱，
+            但好处是不用太大成本。人人都能玩 —— 搭建完放置着，每个月被动收入 400~800 元。
+          </p>
+
+          <div class="glow-divider"></div>
+
+          <h2 class="section-heading">变现来源</h2>
+          <ul
+            class="section-text"
+            style={{ paddingLeft: "20px", marginTop: "16px" }}
+          >
+            <li>会员收款（人工微信）：单月 10 / 终身 49</li>
+            <li>小红书笔记带来的自然流量</li>
+            <li>承接相似站点的搭建外包</li>
+          </ul>
+
+          <div class="glow-divider"></div>
+
+          <h2 class="section-heading">小红书的玩法</h2>
+          <p class="section-text" style={{ marginTop: "16px" }}>
+            一篇老笔记被官方翻牌，收获几十个红心。
+            就这么一点点流量其实就可以带来每月几百块的收入，
+            近期我又偶尔更新一下笔记，但是效果很随机，我还没有找到窍门吧。
+          </p>
+
+          <div class="glow-divider"></div>
+
+          <h2 class="section-heading">自己搭一个？</h2>
+          <p class="section-text" style={{ marginTop: "16px" }}>
+            网站做好后放置一段时间，因为小红书的笔记管理很严格，感觉没法玩。
+            但即便如此，每月依然有被动收入。
+          </p>
+          <p class="section-text" style={{ marginTop: "12px" }}>
+            搭建一个 收 200 元，会流量玩法的可以弄一下，我也偷师学习一下。
+          </p>
+
+          <div
+            style={{
+              marginTop: "24px",
+              padding: "20px",
+              background: "var(--theme-surface-strong)",
+              borderRadius: "var(--theme-border-radius)",
+              textAlign: "center",
+            }}
+          >
+            <div style={{ fontSize: "14px", color: "var(--theme-text-light)" }}>
+              微信咨询
             </div>
-        </div>
-    );
+            <div
+              style={{
+                fontSize: "24px",
+                fontWeight: 800,
+                color: "var(--theme-primary)",
+                marginTop: "4px",
+              }}
+            >
+              wbot10
+            </div>
+          </div>
+        </section>
+      </Container>
+      <Footer />
+    </>
+  );
 }
