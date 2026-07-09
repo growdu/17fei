@@ -16,11 +16,14 @@ import * as $custom from "./routes/custom.tsx";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $member from "./routes/member.tsx";
+import * as $offline from "./routes/offline.tsx";
 import * as $position from "./routes/position.tsx";
 import * as $positions from "./routes/positions.tsx";
 import * as $unopen from "./routes/unopen.tsx";
 import * as $animated_counter from "./islands/animated-counter.tsx";
 import * as $card_game from "./islands/card-game.tsx";
+import * as $error_controls from "./islands/error-controls.tsx";
+import * as $offline_reload from "./islands/offline-reload.tsx";
 import * as $position_card from "./islands/position-card.tsx";
 import * as $position_list from "./islands/position-list.tsx";
 import * as $pwa_install from "./islands/pwa-install.tsx";
@@ -51,6 +54,8 @@ const manifest = {
   islands: {
     "./islands/animated-counter.tsx": $animated_counter,
     "./islands/card-game.tsx": $card_game,
+    "./islands/error-controls.tsx": $error_controls,
+    "./islands/offline-reload.tsx": $offline_reload,
     "./islands/position-card.tsx": $position_card,
     "./islands/position-list.tsx": $position_list,
     "./islands/pwa-install.tsx": $pwa_install,

@@ -44,7 +44,7 @@ const THEMES: ThemeInfo[] = [
 ];
 
 export const handler: Handlers = {
-  async GET(req) {
+  GET(_req: Request, _ctx) {
     return Response.json({
       themes: THEMES,
       default: "romantic",

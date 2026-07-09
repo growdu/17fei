@@ -1,8 +1,6 @@
 # 主题皮肤系统设计方案
 
-**日期**: 2026-05-15
-**项目**: 17fei.fun 主题皮肤系统
-**状态**: 已批准
+**日期**: 2026-05-15 **项目**: 17fei.fun 主题皮肤系统 **状态**: 已批准
 
 ---
 
@@ -15,19 +13,19 @@
 ```css
 /* 主题变量定义 */
 :root {
-  --theme-primary: #ff6b9d;        /* 主色 */
-  --theme-secondary: #c44569;      /* 次色 */
-  --theme-background: #fff0f5;    /* 背景色 */
-  --theme-text: #4a4a4a;           /* 文字色 */
-  --theme-accent: #ff8fab;         /* 强调色 */
-  --theme-card-bg: #ffffff;        /* 卡片背景 */
+  --theme-primary: #ff6b9d; /* 主色 */
+  --theme-secondary: #c44569; /* 次色 */
+  --theme-background: #fff0f5; /* 背景色 */
+  --theme-text: #4a4a4a; /* 文字色 */
+  --theme-accent: #ff8fab; /* 强调色 */
+  --theme-card-bg: #ffffff; /* 卡片背景 */
   --theme-gradient-start: #ff6b9d; /* 渐变起始 */
-  --theme-gradient-end: #c44569;   /* 渐变结束 */
-  --theme-animation: 0.3s ease;     /* 动画速度 */
-  --theme-border-radius: 16px;      /* 圆角大小 */
-  --theme-shadow: 0 4px 20px rgba(255,107,157,0.3); /* 阴影 */
-  --theme-particle: true;           /* 粒子效果 */
-  --theme-icon-style: rounded;      /* 图标风格 rounded/circle/square */
+  --theme-gradient-end: #c44569; /* 渐变结束 */
+  --theme-animation: 0.3s ease; /* 动画速度 */
+  --theme-border-radius: 16px; /* 圆角大小 */
+  --theme-shadow: 0 4px 20px rgba(255, 107, 157, 0.3); /* 阴影 */
+  --theme-particle: true; /* 粒子效果 */
+  --theme-icon-style: rounded; /* 图标风格 rounded/circle/square */
 }
 ```
 
@@ -39,16 +37,17 @@
 
 ### 3. 默认4种主题
 
-| 主题ID | 名称 | 视觉风格 | 适用场景 |
-|--------|------|----------|----------|
+| 主题ID     | 名称     | 视觉风格                     | 适用场景 |
+| ---------- | -------- | ---------------------------- | -------- |
 | `romantic` | 浪漫梦幻 | 粉色渐变、爱心粒子、星空背景 | 默认主题 |
-| `minimal` | 简约现代 | 扁平化、柔和配色、清新线条 | 清新风格 |
-| `playful` | 活泼可爱 | 明快橙黄、圆润元素、弹性动画 | 可爱风格 |
-| `premium` | 高端私密 | 深紫黑金、精致纹理、商务质感 | 高端场景 |
+| `minimal`  | 简约现代 | 扁平化、柔和配色、清新线条   | 清新风格 |
+| `playful`  | 活泼可爱 | 明快橙黄、圆润元素、弹性动画 | 可爱风格 |
+| `premium`  | 高端私密 | 深紫黑金、精致纹理、商务质感 | 高端场景 |
 
 ### 4. 插件式扩展架构
 
 主题目录结构：
+
 ```
 static/themes/
 ├── romantic.css      # 默认主题
@@ -59,6 +58,7 @@ static/themes/
 ```
 
 `_manifest.json` 格式：
+
 ```json
 {
   "themes": ["romantic", "minimal", "playful", "premium"],
@@ -66,7 +66,8 @@ static/themes/
 }
 ```
 
-**扩展方式**：上传新的 `.css` 文件到 `static/themes/`，更新 `_manifest.json` 即可。无需修改代码。
+**扩展方式**：上传新的 `.css` 文件到 `static/themes/`，更新 `_manifest.json`
+即可。无需修改代码。
 
 ---
 
@@ -75,15 +76,16 @@ static/themes/
 ### 1. 激活码机制
 
 - **激活码格式**: 8位字母数字组合（如 `VIP202406`）
-- **存储方式**: Deno KV，键为 `["activation_codes", code]`，值为 `{ used: boolean, usedBy?: email, usedAt?: date }`
+- **存储方式**: Deno KV，键为 `["activation_codes", code]`，值为
+  `{ used: boolean, usedBy?: email, usedAt?: date }`
 - **验证流程**: 用户输入激活码 → 服务端校验 → 解锁VIP身份
 
 ### 2. 试用机制
 
-| 用户类型 | 试用次数 | 权限 |
-|----------|----------|------|
-| 非VIP未试用 | 每天3次 | 可试用任意主题，每次切换消耗1次 |
-| VIP用户 | 无限制 | 可自由切换所有主题 |
+| 用户类型    | 试用次数 | 权限                            |
+| ----------- | -------- | ------------------------------- |
+| 非VIP未试用 | 每天3次  | 可试用任意主题，每次切换消耗1次 |
+| VIP用户     | 无限制   | 可自由切换所有主题              |
 
 - 试用次数存储在 `localStorage`，键为 `theme_trial_{日期}`
 - 每天凌晨0点重置
@@ -110,6 +112,7 @@ static/themes/
 ```
 
 组件状态：
+
 - `availableThemes: Theme[]` - 从manifest加载
 - `currentTheme: string` - 当前激活主题
 - `isVip: boolean` - VIP状态
@@ -123,6 +126,7 @@ static/themes/
 ### 1. 主题切换入口
 
 在页面头部（`_app.tsx`）添加主题切换按钮：
+
 - 一个小图标按钮，点击展开主题选择面板
 - 显示当前主题缩略图预览
 
@@ -149,13 +153,13 @@ static/themes/
 ```tsx
 const loadTheme = async (themeId: string) => {
   // 移除旧主题样式
-  const oldLink = document.getElementById('theme-css');
+  const oldLink = document.getElementById("theme-css");
   oldLink?.remove();
 
   // 加载新主题
-  const link = document.createElement('link');
-  link.id = 'theme-css';
-  link.rel = 'stylesheet';
+  const link = document.createElement("link");
+  link.id = "theme-css";
+  link.rel = "stylesheet";
   link.href = `/themes/${themeId}.css`;
   document.head.appendChild(link);
 };
@@ -178,7 +182,7 @@ export const handler = {
     // 标记已使用
     await kv.set(["activation_codes", code], { ...record.value, used: true });
     return Response.json({ success: true });
-  }
+  },
 };
 ```
 
@@ -207,6 +211,7 @@ export const handler = {
 ## 七、文件清单
 
 ### 新增文件
+
 - `static/themes/_manifest.json` - 主题索引
 - `static/themes/romantic.css` - 浪漫梦幻主题（默认）
 - `static/themes/minimal.css` - 简约现代主题
@@ -217,5 +222,6 @@ export const handler = {
 - `routes/api/themes.ts` - 主题列表API
 
 ### 修改文件
+
 - `routes/_app.tsx` - 添加主题切换按钮入口
 - `twind.config.ts` - 适配主题CSS变量

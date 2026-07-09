@@ -52,7 +52,9 @@ export default function About() {
               <div
                 class="game-card"
                 style={{
-                  borderColor: p.recommended ? "var(--theme-primary)" : undefined,
+                  borderColor: p.recommended
+                    ? "var(--theme-primary)"
+                    : undefined,
                   borderWidth: p.recommended ? "2px" : "1px",
                 }}
               >
@@ -123,7 +125,7 @@ export default function About() {
             >
               wbot10
             </code>{" "}
-           ,1~12 小时内响应。
+            ,1~12 小时内响应。
           </p>
         </section>
 
@@ -150,8 +152,7 @@ export default function About() {
         <section class="section">
           <h2 class="section-heading">其他服务</h2>
           <p class="section-text">
-            想做一个 <strong>完全一样</strong> 的网站自己运营？
-            {" "}
+            想做一个 <strong>完全一样</strong> 的网站自己运营？{" "}
             <a href="/custom" style={{ fontWeight: 600 }}>
               → 看这里怎么搭
             </a>

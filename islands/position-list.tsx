@@ -3,13 +3,6 @@ import { useEffect, useState } from "preact/hooks";
 const STORAGE_VIP = "vip";
 const FREE_COUNT = 40;
 
-const showToast = (msg: string) => {
-  if (typeof window !== "undefined") {
-    const w = window as unknown as { showToast?: (m: string) => void };
-    w.showToast?.(msg);
-  }
-};
-
 interface Props {
   positions: string[];
 }

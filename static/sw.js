@@ -15,10 +15,10 @@ self.addEventListener("activate", (e) => {
       await Promise.all(
         keys
           .filter((k) => ![STATIC_CACHE, PAGE_CACHE, THEME_CACHE].includes(k))
-          .map((k) => caches.delete(k))
+          .map((k) => caches.delete(k)),
       );
       await self.clients.claim();
-    })()
+    })(),
   );
 });
 
@@ -37,7 +37,7 @@ self.addEventListener("install", (e) => {
         "/logo.png",
         "/offline",
       ]).catch(() => undefined)
-    )
+    ),
   );
   self.skipWaiting();
 });
@@ -69,7 +69,7 @@ self.addEventListener("fetch", (event) => {
         } catch {
           return hit || new Response("", { status: 504 });
         }
-      })
+      }),
     );
     return;
   }
@@ -98,13 +98,15 @@ self.addEventListener("fetch", (event) => {
           })
           .catch(() => hit);
         return hit || fetchPromise;
-      })
+      }),
     );
     return;
   }
 
   // 页面 network-first 离线时回退到 /offline 或缓存
-  if (req.mode === "navigate" || req.headers.get("accept")?.includes("text/html")) {
+  if (
+    req.mode === "navigate" || req.headers.get("accept")?.includes("text/html")
+  ) {
     event.respondWith(
       (async () => {
         try {
@@ -121,7 +123,7 @@ self.addEventListener("fetch", (event) => {
           const offline = await cache.match("/offline");
           return offline || new Response("离线", { status: 503 });
         }
-      })()
+      })(),
     );
   }
 });

@@ -29,9 +29,10 @@
   --theme-gradient-end: #f76707;
   --theme-gradient: linear-gradient(135deg, #ff922b 0%, #f76707 100%);
   --theme-gradient-soft: linear-gradient(135deg, #ffe8cc 0%, #ffd8a8 100%);
-  --theme-mesh: radial-gradient(at 15% 20%, #ffd8a8 0px, transparent 50%),
-                radial-gradient(at 85% 80%, #ffe8cc 0px, transparent 55%),
-                radial-gradient(at 50% 100%, #fff3bf 0px, transparent 60%);
+  --theme-mesh:
+    radial-gradient(at 15% 20%, #ffd8a8 0px, transparent 50%),
+    radial-gradient(at 85% 80%, #ffe8cc 0px, transparent 55%),
+    radial-gradient(at 50% 100%, #fff3bf 0px, transparent 60%);
 
   --theme-radius-xs: 8px;
   --theme-border-radius-sm: 14px;

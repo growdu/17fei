@@ -54,8 +54,6 @@ const DARK_THEMES: ThemeInfo[] = [
   },
 ];
 
-const ALL_THEMES = [...LIGHT_THEMES, ...DARK_THEMES];
-
 const MAX_TRIAL_PER_DAY = 3;
 
 const STORAGE_VIP = "vip_status";
@@ -93,11 +91,11 @@ const setTrial = (count: number) => {
 
 const systemPrefersDark = (): boolean => {
   if (typeof window === "undefined") return false;
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+  return globalThis.matchMedia?.("(prefers-color-scheme: dark)").matches ??
+    false;
 };
 
-const pickAuto = (): string =>
-  systemPrefersDark() ? "darkrose" : "romantic";
+const pickAuto = (): string => systemPrefersDark() ? "darkrose" : "romantic";
 
 const loadThemeCss = (themeId: string) => {
   if (typeof document === "undefined") return;
@@ -155,7 +153,7 @@ export default function ThemeSwitcher() {
       ? Math.max(0, MAX_TRIAL_PER_DAY - trial.count)
       : MAX_TRIAL_PER_DAY;
 
-    const mql = window.matchMedia("(prefers-color-scheme: dark)");
+    const mql = globalThis.matchMedia("(prefers-color-scheme: dark)");
     const onChange = () => {
       if (isAuto.value) applyByMode();
     };
@@ -271,6 +269,7 @@ export default function ThemeSwitcher() {
     const active = currentTheme.value === t.id && !isAuto.value;
     return (
       <button
+        type="button"
         key={t.id}
         onClick={() => switchTheme(t.id)}
         style={{
@@ -341,6 +340,7 @@ export default function ThemeSwitcher() {
   return (
     <div class="theme-switcher">
       <button
+        type="button"
         class="theme-toggle-btn"
         onClick={() => (isPanelOpen.value = !isPanelOpen.value)}
         title="切换主题"
@@ -365,7 +365,9 @@ export default function ThemeSwitcher() {
         onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
         onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
       >
-        <span style={{ fontSize: "22px", color: "white" }}>{isAuto.value ? "✨" : "🎨"}</span>
+        <span style={{ fontSize: "22px", color: "white" }}>
+          {isAuto.value ? "✨" : "🎨"}
+        </span>
       </button>
 
       {isPanelOpen.value && (
@@ -409,7 +411,11 @@ export default function ThemeSwitcher() {
               主题选择
             </h3>
             {isVip.value
-              ? <span class="chip" style={{ color: "var(--theme-primary)" }}>✨ VIP</span>
+              ? (
+                <span class="chip" style={{ color: "var(--theme-primary)" }}>
+                  ✨ VIP
+                </span>
+              )
               : null}
           </div>
 
@@ -426,6 +432,7 @@ export default function ThemeSwitcher() {
             }}
           >
             <button
+              type="button"
               onClick={() => setMode("auto")}
               style={{
                 padding: "6px 12px",
@@ -445,6 +452,7 @@ export default function ThemeSwitcher() {
               ✨ 自动
             </button>
             <button
+              type="button"
               onClick={() => setMode("manual")}
               style={{
                 padding: "6px 12px",
@@ -481,7 +489,8 @@ export default function ThemeSwitcher() {
             >
               <span style={{ fontSize: "16px" }}>💡</span>
               <span>
-                跟随系统: {systemPrefersDark() ? "暗" : "亮"} · 手动选主题自动退出
+                跟随系统: {systemPrefersDark() ? "暗" : "亮"}{" "}
+                · 手动选主题自动退出
               </span>
             </div>
           )}
@@ -558,6 +567,7 @@ export default function ThemeSwitcher() {
                 }}
               >
                 <button
+                  type="button"
                   class="btn btn-ghost"
                   style={{ padding: "6px 12px", fontSize: "11px" }}
                   onClick={(e) => {
@@ -568,6 +578,7 @@ export default function ThemeSwitcher() {
                   重置
                 </button>
                 <button
+                  type="button"
                   class="btn"
                   style={{ padding: "6px 12px", fontSize: "11px" }}
                   onClick={(e) => {
@@ -684,6 +695,7 @@ export default function ThemeSwitcher() {
                   </div>
                 )}
                 <button
+                  type="button"
                   class="btn"
                   onClick={activateVip}
                   disabled={isActivating.value}
@@ -710,6 +722,7 @@ export default function ThemeSwitcher() {
             )}
 
             <button
+              type="button"
               onClick={() => (showVipModal.value = false)}
               style={{
                 marginTop: "16px",

@@ -28,10 +28,15 @@
   --theme-gradient-start: #b197fc;
   --theme-gradient-end: #845ef7;
   --theme-gradient: linear-gradient(135deg, #b197fc 0%, #845ef7 100%);
-  --theme-gradient-soft: linear-gradient(135deg, rgba(177, 151, 252, 0.15) 0%, rgba(132, 94, 247, 0.15) 100%);
-  --theme-mesh: radial-gradient(at 20% 15%, rgba(132, 94, 247, 0.25) 0px, transparent 50%),
-                radial-gradient(at 85% 80%, rgba(177, 151, 252, 0.2) 0px, transparent 55%),
-                radial-gradient(at 50% 50%, rgba(40, 33, 70, 0.4) 0px, transparent 60%);
+  --theme-gradient-soft: linear-gradient(
+    135deg,
+    rgba(177, 151, 252, 0.15) 0%,
+    rgba(132, 94, 247, 0.15) 100%
+  );
+  --theme-mesh:
+    radial-gradient(at 20% 15%, rgba(132, 94, 247, 0.25) 0px, transparent 50%),
+    radial-gradient(at 85% 80%, rgba(177, 151, 252, 0.2) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, rgba(40, 33, 70, 0.4) 0px, transparent 60%);
 
   --theme-radius-xs: 6px;
   --theme-border-radius-sm: 10px;

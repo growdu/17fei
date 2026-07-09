@@ -10,7 +10,10 @@ export default function SectionHeading({ children, subtitle }: Props) {
         {children}
       </h2>
       {subtitle && (
-        <p class="section-text" style={{ marginLeft: "16px", marginTop: "4px" }}>
+        <p
+          class="section-text"
+          style={{ marginLeft: "16px", marginTop: "4px" }}
+        >
           {subtitle}
         </p>
       )}

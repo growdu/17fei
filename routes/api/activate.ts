@@ -14,24 +14,27 @@ export const handler: Handlers = {
       if (!code || typeof code !== "string") {
         return Response.json(
           { success: false, message: "激活码不能为空" },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
       const kv = await Deno.openKv();
-      const record = await kv.get<ActivationRecord>(["activation_codes", code.toUpperCase()]);
+      const record = await kv.get<ActivationRecord>([
+        "activation_codes",
+        code.toUpperCase(),
+      ]);
 
       if (!record.value) {
         return Response.json(
           { success: false, message: "激活码无效" },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
       if (record.value.used) {
         return Response.json(
           { success: false, message: "激活码已被使用" },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
@@ -52,7 +55,7 @@ export const handler: Handlers = {
       console.error("Activation error:", error);
       return Response.json(
         { success: false, message: "服务器错误，请重试" },
-        { status: 500 }
+        { status: 500 },
       );
     }
   },

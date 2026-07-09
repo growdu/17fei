@@ -24,16 +24,20 @@
     "z-index:999",
     "pointer-events:none",
   ].join(";");
-  btn.onmouseenter = function () { btn.style.transform = "translateY(-2px) scale(1.06)"; };
-  btn.onmouseleave = function () { btn.style.transform = "translateY(0)"; };
+  btn.onmouseenter = function () {
+    btn.style.transform = "translateY(-2px) scale(1.06)";
+  };
+  btn.onmouseleave = function () {
+    btn.style.transform = "translateY(0)";
+  };
   btn.onclick = function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    globalThis.scrollTo({ top: 0, behavior: "smooth" });
   };
   document.body.appendChild(btn);
 
   var visible = false;
-  window.addEventListener("scroll", function () {
-    var show = window.scrollY > 320;
+  globalThis.addEventListener("scroll", function () {
+    var show = globalThis.scrollY > 320;
     if (show !== visible) {
       visible = show;
       btn.style.opacity = show ? "1" : "0";

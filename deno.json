@@ -4,11 +4,47 @@
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
     "start": "deno run --unstable -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
-    "preview": "deno run -A main.ts",
+    "preview": "deno run --unstable -A main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
-  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
-  "exclude": ["**/_fresh/*"],
+  "lint": {
+    "rules": {
+      "tags": ["fresh", "recommended"]
+    },
+    "exclude": [
+      "static/fxq",
+      "static/js",
+      "static/stat.js",
+      "static/tasks.js",
+      "static/positions.js",
+      "static/card.css",
+      "static/manifest.webmanifest",
+      "static/sitemap.xml",
+      "static/back-to-top.js",
+      "static/keyboard-nav.js",
+      "static/toast.js",
+      "static/theme-init.js",
+      "static/theme-meta.js",
+      "static/pwa-register.js"
+    ]
+  },
+  "fmt": {
+    "exclude": [
+      "static/fxq",
+      "static/js",
+      "docs/**",
+      "static/stat.js",
+      "static/tasks.js",
+      "static/positions.js",
+      "static/back-to-top.js",
+      "static/keyboard-nav.js",
+      "static/toast.js",
+      "static/theme-init.js",
+      "static/theme-meta.js",
+      "static/pwa-register.js"
+    ]
+  },
+  "exclude": ["**/_fresh/*", "static/fxq", "static/js"],
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.7.3/",
     "preact": "https://esm.sh/preact@10.22.0",

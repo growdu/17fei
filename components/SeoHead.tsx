@@ -22,12 +22,8 @@ export default function SeoHead({
   noindex,
 }: Props) {
   const fullUrl = url ? `${SITE}${url}` : SITE;
-  const fullTitle = title.includes("17fei")
-    ? title
-    : `${title} · 17fei.fun`;
-  const fullImage = image.startsWith("http")
-    ? image
-    : `${SITE}${image}`;
+  const fullTitle = title.includes("17fei") ? title : `${title} · 17fei.fun`;
+  const fullImage = image.startsWith("http") ? image : `${SITE}${image}`;
   return (
     <Head>
       <title>{fullTitle}</title>

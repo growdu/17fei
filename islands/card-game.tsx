@@ -1,4 +1,3 @@
-import { useSignal } from "@preact/signals";
 import { useEffect, useState } from "preact/hooks";
 
 interface Props {
@@ -39,7 +38,6 @@ export default function CardGame({ versions }: Props) {
   const [content, setContent] = useState<string>("");
   const [showCard, setShowCard] = useState<boolean>(true);
   const [total, setTotal] = useState<number>(0);
-  const [flipping, setFlipping] = useState<boolean>(false);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_VERSION) || "lover0";
@@ -69,14 +67,12 @@ export default function CardGame({ versions }: Props) {
 
   const pickTask = () => {
     if (!tasks.length) return;
-    setFlipping(true);
     setTimeout(() => {
       const newTask = tasks[Math.floor(Math.random() * tasks.length)];
       setContent(newTask);
       const next = total + 1;
       setTotal(next);
       localStorage.setItem(STORAGE_COUNTER, String(next));
-      setFlipping(false);
       if (next === 1 || next % 10 === 0) {
         showToast(next === 1 ? "🎉 开始第一张" : `已经抽了 ${next} 张`);
       }
@@ -108,9 +104,7 @@ export default function CardGame({ versions }: Props) {
           class="select"
           style={{ width: "auto" }}
           value={version}
-          onChange={(e) =>
-            initVersion((e.target as HTMLSelectElement).value)
-          }
+          onChange={(e) => initVersion((e.target as HTMLSelectElement).value)}
         >
           {versions.map(([key]) => {
             const needVip = VIP_PREFIXES_NEED.some((p) => key.startsWith(p));

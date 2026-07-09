@@ -1,10 +1,15 @@
 # 主题皮肤系统实现计划
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use
+> superpowers:subagent-driven-development (recommended) or
+> superpowers:executing-plans to implement this plan task-by-task. Steps use
+> checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 实现主题皮肤系统，支持4种可切换主题，VIP用户可自由切换，非VIP用户每天3次试用机会
+**Goal:**
+实现主题皮肤系统，支持4种可切换主题，VIP用户可自由切换，非VIP用户每天3次试用机会
 
-**Architecture:** 采用插件式主题架构，CSS变量定义主题样式，动态加载切换。VIP验证通过服务端激活码API，试用次数存储在localStorage。
+**Architecture:**
+采用插件式主题架构，CSS变量定义主题样式，动态加载切换。VIP验证通过服务端激活码API，试用次数存储在localStorage。
 
 **Tech Stack:** Fresh 1.5.2 + Preact + Twind + Deno KV
 
@@ -36,6 +41,7 @@
 ## Task 1: 创建主题变量定义文件
 
 **Files:**
+
 - Create: `static/themes/romantic.css`
 - Create: `static/themes/minimal.css`
 - Create: `static/themes/playful.css`
@@ -65,20 +71,24 @@
 
   /* 卡片 */
   --theme-card-bg: #ffffff;
-  --theme-card-border: rgba(255,107,157,0.2);
+  --theme-card-border: rgba(255, 107, 157, 0.2);
 
   /* 渐变 */
   --theme-gradient-start: #ff6b9d;
   --theme-gradient-end: #c44569;
-  --theme-gradient: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+  --theme-gradient: linear-gradient(
+    135deg,
+    var(--theme-gradient-start),
+    var(--theme-gradient-end)
+  );
 
   /* 圆角 */
   --theme-border-radius: 16px;
   --theme-border-radius-sm: 8px;
 
   /* 阴影 */
-  --theme-shadow: 0 4px 20px rgba(255,107,157,0.3);
-  --theme-shadow-hover: 0 8px 30px rgba(255,107,157,0.4);
+  --theme-shadow: 0 4px 20px rgba(255, 107, 157, 0.3);
+  --theme-shadow-hover: 0 8px 30px rgba(255, 107, 157, 0.4);
 
   /* 动画 */
   --theme-transition: 0.3s ease;
@@ -120,20 +130,24 @@
 
   /* 卡片 */
   --theme-card-bg: #ffffff;
-  --theme-card-border: rgba(0,0,0,0.08);
+  --theme-card-border: rgba(0, 0, 0, 0.08);
 
   /* 渐变 */
   --theme-gradient-start: #5c7cfa;
   --theme-gradient-end: #4c6ef5;
-  --theme-gradient: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+  --theme-gradient: linear-gradient(
+    135deg,
+    var(--theme-gradient-start),
+    var(--theme-gradient-end)
+  );
 
   /* 圆角 */
   --theme-border-radius: 8px;
   --theme-border-radius-sm: 4px;
 
   /* 阴影 */
-  --theme-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  --theme-shadow-hover: 0 4px 16px rgba(0,0,0,0.12);
+  --theme-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --theme-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
 
   /* 动画 */
   --theme-transition: 0.2s ease;
@@ -175,20 +189,24 @@
 
   /* 卡片 */
   --theme-card-bg: #ffffff;
-  --theme-card-border: rgba(255,146,43,0.2);
+  --theme-card-border: rgba(255, 146, 43, 0.2);
 
   /* 渐变 */
   --theme-gradient-start: #ff922b;
   --theme-gradient-end: #ff7b00;
-  --theme-gradient: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+  --theme-gradient: linear-gradient(
+    135deg,
+    var(--theme-gradient-start),
+    var(--theme-gradient-end)
+  );
 
   /* 圆角 */
   --theme-border-radius: 20px;
   --theme-border-radius-sm: 12px;
 
   /* 阴影 */
-  --theme-shadow: 0 4px 12px rgba(255,146,43,0.25);
-  --theme-shadow-hover: 0 6px 20px rgba(255,146,43,0.35);
+  --theme-shadow: 0 4px 12px rgba(255, 146, 43, 0.25);
+  --theme-shadow-hover: 0 6px 20px rgba(255, 146, 43, 0.35);
 
   /* 动画 */
   --theme-transition: 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -230,21 +248,25 @@
   --theme-text-light: #adb5bd;
 
   /* 卡片 */
-  --theme-card-bg: rgba(255,255,255,0.05);
-  --theme-card-border: rgba(151,117,250,0.3);
+  --theme-card-bg: rgba(255, 255, 255, 0.05);
+  --theme-card-border: rgba(151, 117, 250, 0.3);
 
   /* 渐变 */
   --theme-gradient-start: #9775fa;
   --theme-gradient-end: #845ef7;
-  --theme-gradient: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+  --theme-gradient: linear-gradient(
+    135deg,
+    var(--theme-gradient-start),
+    var(--theme-gradient-end)
+  );
 
   /* 圆角 */
   --theme-border-radius: 12px;
   --theme-border-radius-sm: 6px;
 
   /* 阴影 */
-  --theme-shadow: 0 4px 20px rgba(151,117,250,0.2);
-  --theme-shadow-hover: 0 8px 30px rgba(151,117,250,0.3);
+  --theme-shadow: 0 4px 20px rgba(151, 117, 250, 0.2);
+  --theme-shadow-hover: 0 8px 30px rgba(151, 117, 250, 0.3);
 
   /* 动画 */
   --theme-transition: 0.3s ease;
@@ -268,6 +290,7 @@
 ## Task 5: 创建主题索引文件
 
 **Files:**
+
 - Create: `static/themes/_manifest.json`
 
 - [ ] **Step 1: 创建 _manifest.json**
@@ -286,6 +309,7 @@
 ## Task 6: 创建主题切换Island组件
 
 **Files:**
+
 - Create: `islands/theme-switcher.tsx`
 
 - [ ] **Step 1: 创建 theme-switcher.tsx**
@@ -453,7 +477,8 @@ export default function ThemeSwitcher() {
           width: "44px",
           height: "44px",
           borderRadius: "50%",
-          background: "var(--theme-btn-bg, linear-gradient(135deg, #ff6b9d, #c44569))",
+          background:
+            "var(--theme-btn-bg, linear-gradient(135deg, #ff6b9d, #c44569))",
           border: "none",
           cursor: "pointer",
           boxShadow: "var(--theme-shadow)",
@@ -498,14 +523,12 @@ export default function ThemeSwitcher() {
                   gap: "12px",
                   padding: "12px",
                   borderRadius: "var(--theme-border-radius-sm)",
-                  background:
-                    currentTheme.value === theme.id
-                      ? "var(--theme-background-secondary)"
-                      : "transparent",
-                  border:
-                    currentTheme.value === theme.id
-                      ? "2px solid var(--theme-primary)"
-                      : "1px solid var(--theme-card-border)",
+                  background: currentTheme.value === theme.id
+                    ? "var(--theme-background-secondary)"
+                    : "transparent",
+                  border: currentTheme.value === theme.id
+                    ? "2px solid var(--theme-primary)"
+                    : "1px solid var(--theme-card-border)",
                   cursor: "pointer",
                   transition: "all 0.2s",
                 }}
@@ -537,7 +560,14 @@ export default function ThemeSwitcher() {
                   </div>
                 </div>
                 {currentTheme.value === theme.id && (
-                  <span style={{ marginLeft: "auto", color: "var(--theme-primary)" }}>✓</span>
+                  <span
+                    style={{
+                      marginLeft: "auto",
+                      color: "var(--theme-primary)",
+                    }}
+                  >
+                    ✓
+                  </span>
                 )}
               </div>
             ))}
@@ -556,7 +586,11 @@ export default function ThemeSwitcher() {
                 textAlign: "center",
               }}
             >
-              剩余试用次数: <strong style={{ color: "var(--theme-primary)" }}>{trialCount.value}</strong> / {MAX_TRIAL_PER_DAY}
+              剩余试用次数:{" "}
+              <strong style={{ color: "var(--theme-primary)" }}>
+                {trialCount.value}
+              </strong>{" "}
+              / {MAX_TRIAL_PER_DAY}
               <br />
               <button
                 onClick={(e) => {
@@ -611,65 +645,70 @@ export default function ThemeSwitcher() {
             <h2 style={{ margin: "0 0 8px 0", color: "var(--theme-text)" }}>
               开通VIP
             </h2>
-            <p style={{ color: "var(--theme-text-light)", marginBottom: "24px" }}>
+            <p
+              style={{ color: "var(--theme-text-light)", marginBottom: "24px" }}
+            >
               解锁全部主题，享受无限切换
             </p>
 
-            {isVip.value ? (
-              <div style={{ color: "var(--theme-primary)", padding: "20px" }}>
-                您已是VIP会员 ✨
-              </div>
-            ) : (
-              <>
-                <input
-                  type="text"
-                  placeholder="输入激活码"
-                  value={activationCode.value}
-                  onInput={(e) =>
-                    (activationCode.value = (e.target as HTMLInputElement).value)
-                  }
-                  style={{
-                    width: "100%",
-                    padding: "12px",
-                    borderRadius: "var(--theme-border-radius-sm)",
-                    border: "1px solid var(--theme-card-border)",
-                    background: "var(--theme-background)",
-                    color: "var(--theme-text)",
-                    fontSize: "16px",
-                    textAlign: "center",
-                    marginBottom: "12px",
-                  }}
-                />
-                {activationError.value && (
-                  <div
+            {isVip.value
+              ? (
+                <div style={{ color: "var(--theme-primary)", padding: "20px" }}>
+                  您已是VIP会员 ✨
+                </div>
+              )
+              : (
+                <>
+                  <input
+                    type="text"
+                    placeholder="输入激活码"
+                    value={activationCode.value}
+                    onInput={(
+                      e,
+                    ) => (activationCode.value =
+                      (e.target as HTMLInputElement).value)}
                     style={{
-                      color: "#e53e3e",
-                      fontSize: "12px",
+                      width: "100%",
+                      padding: "12px",
+                      borderRadius: "var(--theme-border-radius-sm)",
+                      border: "1px solid var(--theme-card-border)",
+                      background: "var(--theme-background)",
+                      color: "var(--theme-text)",
+                      fontSize: "16px",
+                      textAlign: "center",
                       marginBottom: "12px",
                     }}
+                  />
+                  {activationError.value && (
+                    <div
+                      style={{
+                        color: "#e53e3e",
+                        fontSize: "12px",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      {activationError.value}
+                    </div>
+                  )}
+                  <button
+                    onClick={activateVip}
+                    disabled={isActivating.value}
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      background: "var(--theme-btn-bg)",
+                      border: "none",
+                      borderRadius: "var(--theme-border-radius-sm)",
+                      color: "white",
+                      fontSize: "16px",
+                      cursor: isActivating.value ? "not-allowed" : "pointer",
+                      opacity: isActivating.value ? 0.7 : 1,
+                    }}
                   >
-                    {activationError.value}
-                  </div>
-                )}
-                <button
-                  onClick={activateVip}
-                  disabled={isActivating.value}
-                  style={{
-                    width: "100%",
-                    padding: "12px",
-                    background: "var(--theme-btn-bg)",
-                    border: "none",
-                    borderRadius: "var(--theme-border-radius-sm)",
-                    color: "white",
-                    fontSize: "16px",
-                    cursor: isActivating.value ? "not-allowed" : "pointer",
-                    opacity: isActivating.value ? 0.7 : 1,
-                  }}
-                >
-                  {isActivating.value ? "激活中..." : "激活VIP"}
-                </button>
-              </>
-            )}
+                    {isActivating.value ? "激活中..." : "激活VIP"}
+                  </button>
+                </>
+              )}
 
             <button
               onClick={() => (showVipModal.value = false)}
@@ -696,6 +735,7 @@ export default function ThemeSwitcher() {
 ## Task 7: 创建激活码验证API
 
 **Files:**
+
 - Create: `routes/api/activate.ts`
 
 - [ ] **Step 1: 创建 activate API**
@@ -717,24 +757,27 @@ export const handler: Handlers = {
       if (!code || typeof code !== "string") {
         return Response.json(
           { success: false, message: "激活码不能为空" },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
       const kv = await Deno.openKv();
-      const record = await kv.get<ActivationRecord>(["activation_codes", code.toUpperCase()]);
+      const record = await kv.get<ActivationRecord>([
+        "activation_codes",
+        code.toUpperCase(),
+      ]);
 
       if (!record.value) {
         return Response.json(
           { success: false, message: "激活码无效" },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
       if (record.value.used) {
         return Response.json(
           { success: false, message: "激活码已被使用" },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
@@ -755,7 +798,7 @@ export const handler: Handlers = {
       console.error("Activation error:", error);
       return Response.json(
         { success: false, message: "服务器错误，请重试" },
-        { status: 500 }
+        { status: 500 },
       );
     }
   },
@@ -767,6 +810,7 @@ export const handler: Handlers = {
 ## Task 8: 创建主题列表API
 
 **Files:**
+
 - Create: `routes/api/themes.ts`
 
 - [ ] **Step 1: 创建 themes API**
@@ -823,6 +867,7 @@ export const handler: Handlers = {
 ## Task 9: 修改全局布局添加主题切换器
 
 **Files:**
+
 - Modify: `routes/_app.tsx`
 
 - [ ] **Step 1: 读取当前 _app.tsx**
@@ -863,6 +908,7 @@ export default function App({ Component }: PageProps) {
 ```
 
 并添加导入：
+
 ```tsx
 import ThemeSwitcher from "../islands/theme-switcher.tsx";
 ```
@@ -872,6 +918,7 @@ import ThemeSwitcher from "../islands/theme-switcher.tsx";
 ## Task 10: 更新 Twind 配置
 
 **Files:**
+
 - Modify: `twind.config.ts`
 
 - [ ] **Step 1: 读取当前 twind.config.ts**
@@ -918,6 +965,7 @@ export default defineConfig({
 ## Task 11: 初始化激活码（可选）
 
 **Files:**
+
 - Create: `scripts/init-activation-codes.ts`
 
 - [ ] **Step 1: 创建激活码初始化脚本**
@@ -947,6 +995,7 @@ console.log("Done!");
 ```
 
 运行命令：
+
 ```bash
 deno run --allow-net --allow-write scripts/init-activation-codes.ts
 ```
@@ -967,28 +1016,31 @@ deno run --allow-net --allow-write scripts/init-activation-codes.ts
 
 ## 文件清单
 
-| 文件 | 操作 |
-|------|------|
-| `static/themes/_manifest.json` | 新建 |
-| `static/themes/romantic.css` | 新建 |
-| `static/themes/minimal.css` | 新建 |
-| `static/themes/playful.css` | 新建 |
-| `static/themes/premium.css` | 新建 |
-| `islands/theme-switcher.tsx` | 新建 |
-| `routes/api/activate.ts` | 新建 |
-| `routes/api/themes.ts` | 新建 |
-| `routes/_app.tsx` | 修改 |
-| `twind.config.ts` | 修改 |
+| 文件                               | 操作         |
+| ---------------------------------- | ------------ |
+| `static/themes/_manifest.json`     | 新建         |
+| `static/themes/romantic.css`       | 新建         |
+| `static/themes/minimal.css`        | 新建         |
+| `static/themes/playful.css`        | 新建         |
+| `static/themes/premium.css`        | 新建         |
+| `islands/theme-switcher.tsx`       | 新建         |
+| `routes/api/activate.ts`           | 新建         |
+| `routes/api/themes.ts`             | 新建         |
+| `routes/_app.tsx`                  | 修改         |
+| `twind.config.ts`                  | 修改         |
 | `scripts/init-activation-codes.ts` | 新建（可选） |
 
 ---
 
-**Plan complete and saved to `docs/superpowers/plans/2026-05-15-theme-implementation.md`**
+**Plan complete and saved to
+`docs/superpowers/plans/2026-05-15-theme-implementation.md`**
 
 **Two execution options:**
 
-**1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
+**1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task,
+review between tasks, fast iteration
 
-**2. Inline Execution** - Execute tasks in this session using executing-plans, batch execution with checkpoints
+**2. Inline Execution** - Execute tasks in this session using executing-plans,
+batch execution with checkpoints
 
 **Which approach?**

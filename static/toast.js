@@ -27,14 +27,14 @@
   }
 
   // Toast.island 同时挂一个同名, 避免冲突
-  if (typeof window.__toastHandler === "function") {
-    var orig = window.__toastHandler;
-    window.__toastHandler = function (m, opts) {
+  if (typeof globalThis.__toastHandler === "function") {
+    var orig = globalThis.__toastHandler;
+    globalThis.__toastHandler = function (m, opts) {
       orig(m, opts);
       showToast(m, opts);
     };
   } else {
-    window.__toastHandler = showToast;
+    globalThis.__toastHandler = showToast;
   }
-  window.showToast = showToast;
+  globalThis.showToast = showToast;
 })();

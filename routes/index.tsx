@@ -1,5 +1,3 @@
-import { useSignal } from "@preact/signals";
-
 import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
 import SeoHead from "../components/SeoHead.tsx";
@@ -209,9 +207,9 @@ export default function Home() {
         <section class="section">
           <h2 class="section-heading">友邻玩法</h2>
           <p class="section-text">
-            玩法参考自网络开源与公开资料；
-            本项目做内容聚合 + 重新美化 + 工程化整合，无版权素材来自网络。
-            如有版权问题请 微信: wbot10 联系删除。
+            玩法参考自网络开源与公开资料； 本项目做内容聚合 + 重新美化 +
+            工程化整合，无版权素材来自网络。 如有版权问题请 微信: wbot10
+            联系删除。
           </p>
         </section>
       </Container>

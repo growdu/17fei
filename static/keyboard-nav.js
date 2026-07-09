@@ -9,7 +9,7 @@
     return false;
   };
 
-  window.addEventListener("keydown", function (e) {
+  globalThis.addEventListener("keydown", function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (isEditing(e.target)) return;
     var key = e.key.toLowerCase();
@@ -39,7 +39,9 @@
         "%c17fei 快捷键",
         "color:#ff4d8d;font-weight:bold;font-size:14px",
       );
-      console.log("h 首页 · c 任务卡 · p 姿势卡 · g 飞行棋 · a 关于 · t 主题 · ? 帮助");
+      console.log(
+        "h 首页 · c 任务卡 · p 姿势卡 · g 飞行棋 · a 关于 · t 主题 · ? 帮助",
+      );
     }
   });
 })();

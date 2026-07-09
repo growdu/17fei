@@ -1,4 +1,4 @@
-import { useSignal, useSignalEffect } from "@preact/signals";
+import { useSignal } from "@preact/signals";
 import { useEffect } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 
@@ -29,19 +29,19 @@ export default function PwaInstall() {
       visible.value = false;
     };
 
-    window.addEventListener("beforeinstallprompt", onPrompt);
-    window.addEventListener("appinstalled", onInstalled);
+    globalThis.addEventListener("beforeinstallprompt", onPrompt);
+    globalThis.addEventListener("appinstalled", onInstalled);
 
     // 检查 navigator standalone(已安装)
     const isStandalone =
-      window.matchMedia("(display-mode: standalone)").matches ||
+      globalThis.matchMedia("(display-mode: standalone)").matches ||
       // @ts-ignore iOS
       (typeof navigator.standalone === "boolean" && navigator.standalone);
     if (isStandalone) installed.value = true;
 
     return () => {
-      window.removeEventListener("beforeinstallprompt", onPrompt);
-      window.removeEventListener("appinstalled", onInstalled);
+      globalThis.removeEventListener("beforeinstallprompt", onPrompt);
+      globalThis.removeEventListener("appinstalled", onInstalled);
     };
   }, []);
 
@@ -124,6 +124,7 @@ export default function PwaInstall() {
         </div>
       </div>
       <button
+        type="button"
         class="btn"
         onClick={install}
         style={{ padding: "8px 14px", fontSize: "12px" }}
@@ -131,6 +132,7 @@ export default function PwaInstall() {
         安装
       </button>
       <button
+        type="button"
         aria-label="关闭"
         onClick={dismiss}
         style={{

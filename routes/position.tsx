@@ -2,7 +2,7 @@ import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
 import SeoHead from "../components/SeoHead.tsx";
 import PositionCard from "../islands/position-card.tsx";
-import { POSITION_KEYS, FREE_POSITION_COUNT } from "../lib/positions.ts";
+import { FREE_POSITION_COUNT, POSITION_KEYS } from "../lib/positions.ts";
 
 export default function PositionPage() {
   return (

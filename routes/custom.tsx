@@ -20,14 +20,17 @@ export default function Custom() {
         <section class="form-card">
           <h2 class="section-heading">坦诚说: 不太赚钱</h2>
           <p class="section-text" style={{ marginTop: "16px" }}>
-            这个网站其实不怎么赚钱,
-            但好处是不用太大成本。人人都能玩 —— 搭建完放置着,每个月被动收入 400~800 元。
+            这个网站其实不怎么赚钱, 但好处是不用太大成本。人人都能玩 ——
+            搭建完放置着,每个月被动收入 400~800 元。
           </p>
 
           <div class="glow-divider"></div>
 
           <h2 class="section-heading">变现来源</h2>
-          <ul class="section-text" style={{ paddingLeft: "20px", marginTop: "16px" }}>
+          <ul
+            class="section-text"
+            style={{ paddingLeft: "20px", marginTop: "16px" }}
+          >
             <li>会员收款(人工微信):单月 10 / 终身 49</li>
             <li>小红书笔记带来的自然流量</li>
             <li>承接相似站点的搭建外包</li>

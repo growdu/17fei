@@ -5,10 +5,16 @@ interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   children: ComponentChildren;
 }
 
-export default function Button({ variant = "solid", children, ...rest }: Props) {
+export default function Button(
+  { variant = "solid", children, ...rest }: Props,
+) {
   const className = variant === "ghost" ? "btn btn-ghost" : "btn";
   return (
-    <button {...rest} class={`${rest.class ?? ""} ${className}`.trim()}>
+    <button
+      {...rest}
+      type={rest.type ?? "button"}
+      class={`${rest.class ?? ""} ${className}`.trim()}
+    >
       {children}
     </button>
   );

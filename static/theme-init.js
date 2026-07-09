@@ -7,8 +7,8 @@
 
     if (explicitAuto) {
       // 自动模式: 跟随系统暗色
-      var isDark = window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var isDark = globalThis.matchMedia &&
+        globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
       var theme = isDark ? "darkrose" : "romantic";
       var existing = document.getElementById("theme-css");
       if (existing) existing.remove();
@@ -18,8 +18,10 @@
       link.href = "/themes/" + theme + ".css";
       document.head.appendChild(link);
       document.documentElement.setAttribute("data-theme", theme);
-      document.documentElement.setAttribute("data-theme-mode",
-        isDark ? "dark" : "light");
+      document.documentElement.setAttribute(
+        "data-theme-mode",
+        isDark ? "dark" : "light",
+      );
       // 同时存到 localStorage, 让 theme-meta.js / SSR 知道当前主题
       localStorage.setItem("current_theme", theme);
       return;

@@ -28,10 +28,15 @@
   --theme-gradient-start: #ff6b9d;
   --theme-gradient-end: #cc3370;
   --theme-gradient: linear-gradient(135deg, #ff6b9d 0%, #cc3370 100%);
-  --theme-gradient-soft: linear-gradient(135deg, rgba(255,107,157,0.18) 0%, rgba(204,51,112,0.18) 100%);
-  --theme-mesh: radial-gradient(at 15% 15%, rgba(255,107,157,0.18) 0px, transparent 45%),
-                radial-gradient(at 85% 80%, rgba(204,51,112,0.15) 0px, transparent 50%),
-                radial-gradient(at 50% 50%, rgba(26,14,26,1) 0px, transparent 60%);
+  --theme-gradient-soft: linear-gradient(
+    135deg,
+    rgba(255, 107, 157, 0.18) 0%,
+    rgba(204, 51, 112, 0.18) 100%
+  );
+  --theme-mesh:
+    radial-gradient(at 15% 15%, rgba(255, 107, 157, 0.18) 0px, transparent 45%),
+    radial-gradient(at 85% 80%, rgba(204, 51, 112, 0.15) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(26, 14, 26, 1) 0px, transparent 60%);
 
   --theme-radius-xs: 6px;
   --theme-border-radius-sm: 12px;
@@ -39,8 +44,8 @@
   --theme-border-radius-lg: 28px;
   --theme-border-radius-pill: 999px;
 
-  --theme-shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
-  --theme-shadow: 0 10px 28px rgba(0,0,0,0.4);
+  --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --theme-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
   --theme-shadow-lg: 0 24px 60px rgba(255, 107, 157, 0.25);
   --theme-shadow-glow: 0 0 32px rgba(255, 107, 157, 0.4);
 

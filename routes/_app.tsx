@@ -82,7 +82,7 @@ export default function App({ Component }: AppProps) {
         <script
           type="application/ld+json"
           // deno-lint-ignore react-no-danger
-          dangerouslySetInnerHTML={jsonLd}
+          dangerouslySetInnerHTML={{ __html: jsonLd }}
         />
 
         <title>{SITE_TITLE}</title>
@@ -111,4 +111,3 @@ export default function App({ Component }: AppProps) {
     </html>
   );
 }
-

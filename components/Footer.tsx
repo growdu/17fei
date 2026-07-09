@@ -53,10 +53,18 @@ export default function Footer(_props: JSX.HTMLAttributes<HTMLElement>) {
       </nav>
       <div style={{ fontSize: "13px", color: "var(--theme-text-light)" }}>
         <span style={{ marginRight: "8px" }}>© {year}</span>
-        <span style={{ color: "var(--theme-primary)", fontWeight: 600 }}>17fei.fun</span>
+        <span style={{ color: "var(--theme-primary)", fontWeight: 600 }}>
+          17fei.fun
+        </span>
         <span style={{ marginLeft: "8px" }}>· 让爱更有趣</span>
       </div>
-      <div style={{ fontSize: "11px", color: "var(--theme-text-muted)", marginTop: "8px" }}>
+      <div
+        style={{
+          fontSize: "11px",
+          color: "var(--theme-text-muted)",
+          marginTop: "8px",
+        }}
+      >
         本站仅供成年人娱乐 · 内容无害 · 不收集隐私
       </div>
     </footer>

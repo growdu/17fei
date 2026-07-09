@@ -6,7 +6,9 @@ interface Props {
   showLogo?: boolean;
 }
 
-export default function Hero({ title, subtitle, badge, emoji, showLogo }: Props) {
+export default function Hero(
+  { title, subtitle, badge, emoji, showLogo }: Props,
+) {
   // 优先级: showLogo (logo.png) > emoji > 都不显示
   const displayVisual = showLogo
     ? <img src="/logo.png" alt="logo" class="hero-logo" />

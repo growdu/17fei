@@ -2,9 +2,13 @@ import { defineConfig } from "$fresh/server.ts";
 import twindPlugin from "$fresh/plugins/twind.ts";
 import twindConfig from "./twind.config.ts";
 
-// @ts-ignore - selfURL is required by Fresh's twind plugin
-twindConfig.selfURL = new URL("./twind.config.ts", import.meta.url).href;
+// twindConfig 在编译时是 BaseTheme 类型,运行时需要 selfURL (Fresh 1.x 注入)
+const config = twindConfig as unknown as
+  & { selfURL: string }
+  & typeof twindConfig;
+config.selfURL = new URL("./twind.config.ts", import.meta.url).href;
 
 export default defineConfig({
-  plugins: [twindPlugin(twindConfig)],
+  // deno-lint-ignore no-explicit-any
+  plugins: [twindPlugin(config as any)],
 });

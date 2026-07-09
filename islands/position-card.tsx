@@ -197,19 +197,27 @@ export default function PositionCard({ positions, freeCount }: Props) {
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "12px",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
         <button
+          type="button"
           class="btn"
           onClick={drawPosition}
           disabled={flipping}
         >
           {flipping ? "翻牌中…" : "🎲 抽一个"}
         </button>
-        <button class="btn btn-ghost" onClick={reset}>
+        <button type="button" class="btn btn-ghost" onClick={reset}>
           🔄 复位
         </button>
         {src && (
-          <button class="btn btn-ghost" onClick={toggleFav}>
+          <button type="button" class="btn btn-ghost" onClick={toggleFav}>
             {isFav.value ? "⭐ 已收藏" : "☆ 收藏"}
           </button>
         )}

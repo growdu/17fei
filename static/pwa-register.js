@@ -1,9 +1,11 @@
 // 注册 Service Worker (仅 https / localhost)
 (function () {
   if (!("serviceWorker" in navigator)) return;
-  if (location.protocol !== "https:" && location.hostname !== "localhost") return;
+  if (location.protocol !== "https:" && location.hostname !== "localhost") {
+    return;
+  }
 
-  window.addEventListener("load", function () {
+  globalThis.addEventListener("load", function () {
     navigator.serviceWorker.register("/sw.js", { scope: "/" }).then(
       function (reg) {
         // 处理更新
@@ -19,7 +21,7 @@
       },
       function (err) {
         console.warn("[17fei] SW 注册失败:", err);
-      }
+      },
     );
   });
 })();

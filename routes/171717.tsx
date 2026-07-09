@@ -75,7 +75,8 @@ export default function ActivatePage() {
             fontSize: "13px",
           }}
         >
-          微信咨询: <strong style={{ color: "var(--theme-primary)" }}>wbot10</strong>
+          微信咨询:{" "}
+          <strong style={{ color: "var(--theme-primary)" }}>wbot10</strong>
         </p>
       </Container>
     </>

@@ -1,6 +1,7 @@
 import Container from "../components/Container.tsx";
 import Footer from "../components/Footer.tsx";
 import SeoHead from "../components/SeoHead.tsx";
+import OfflineReload from "../islands/offline-reload.tsx";
 
 export default function Offline() {
   return (
@@ -31,16 +32,7 @@ export default function Offline() {
               marginTop: "24px",
             }}
           >
-            <button
-              class="btn"
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                globalThis.location.reload();
-              }}
-            >
-              🔄 重新连接
-            </button>
+            <OfflineReload />
             <a href="/" class="btn btn-ghost">🏠 回首页</a>
           </div>
 
